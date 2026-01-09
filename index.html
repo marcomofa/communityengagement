@@ -5,415 +5,426 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Community Engagement at Options For All</title>
 
-  <!-- Keep SDK + EmailJS (since your original file uses them) -->
+  <!-- (Optional) Element SDK if you need it. Safe to keep. -->
   <script src="/_sdk/element_sdk.js"></script>
-  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+
+  <!-- EmailJS -->
   <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
 
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <!-- Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
   <style>
     :root{
-      /* Brand / theme */
       --bg: #f8fafc;
-      --accent: #1e3a8a;
       --surface: #ffffff;
-      --text: #211c1d;
-      --muted: #565656;
-      --button: #ea580c;
+      --text: #0f172a;
+      --muted: #475569;
+      --accent: #2067ce;      /* OFA blue */
+      --accent2: #ff6d00;     /* OFA orange */
+      --sectionA: #e2efff;
+      --sectionB: #ffd4b8;
 
-      /* Section backgrounds */
-      --section-a: #e2efff;
-      --section-b: #ffd4b8;
+      --radius: 16px;
+      --shadow-sm: 0 6px 18px rgba(15, 23, 42, 0.10);
+      --shadow-md: 0 14px 34px rgba(15, 23, 42, 0.14);
 
-      /* Card */
-      --card-radius: 16px;
-      --card-border: rgba(0,0,0,0.10);
-      --card-shadow: 0 10px 24px rgba(0,0,0,0.10);
-      --card-shadow-hover: 0 14px 34px rgba(0,0,0,0.14);
+      --container: 1100px;
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
     html, body { height: 100%; width: 100%; }
     body {
-      font-family: 'Poppins', system-ui, -apple-system, sans-serif;
+      font-family: "Poppins", system-ui, -apple-system, sans-serif;
       color: var(--text);
       background: var(--bg);
       line-height: 1.6;
       overflow-x: hidden;
-      font-size: 16px;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
     }
 
-    .page-wrapper { width: 100%; min-height: 100%; overflow-x: hidden; }
+    /* Layout helpers */
+    .page-wrapper { width: 100%; min-height: 100%; }
+    .container {
+      max-width: var(--container);
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
 
     /* NAV */
-    .navbar{
-      position: fixed; top: 0; left: 0; right: 0;
+    .navbar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
       z-index: 100;
-      background: rgba(255,255,255,0.95);
+      background: rgba(255, 255, 255, 0.92);
       backdrop-filter: blur(12px);
       box-shadow: 0 2px 12px rgba(0,0,0,0.08);
-      padding: 1rem 2rem;
+      padding: 0.9rem 0;
     }
-    .navbar-content{
-      max-width: 1200px;
+    .navbar-content {
+      max-width: 1400px;
       margin: 0 auto;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap: 1.5rem;
+      padding: 0 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 2rem;
     }
-    .site-logo{ height: 42px; width: auto; display:block; }
+    .site-logo { height: 42px; width: auto; display: block; }
 
     /* Language Toggle */
-    .language-toggle{ display:flex; align-items:center; gap: .625rem; }
-    .lang-label{
-      font-size: .95rem;
-      font-weight: 700;
-      opacity: .7;
-      cursor: pointer;
+    .language-toggle {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
       user-select: none;
-      transition: opacity .2s ease;
     }
-    .lang-label.active{ opacity: 1; }
+    .lang-label {
+      font-size: 0.95rem;
+      font-weight: 700;
+      opacity: 0.6;
+      transition: opacity 0.2s ease;
+      cursor: pointer;
+    }
+    .lang-label.active { opacity: 1; }
 
-    .toggle-switch{
+    .toggle-switch {
       position: relative;
-      width: 52px; height: 28px;
-      background: #e0e0e0;
+      width: 54px;
+      height: 30px;
+      background: #e5e7eb;
       border-radius: 999px;
       cursor: pointer;
-      transition: background .2s ease;
+      transition: background 0.2s ease;
+      border: 1px solid rgba(15,23,42,0.08);
     }
-    .toggle-switch.active{ background: #40916c; }
-    .toggle-slider{
-      position:absolute; top: 3px; left: 3px;
-      width: 22px; height: 22px;
+    .toggle-switch.active { background: rgba(32, 103, 206, 0.25); }
+    .toggle-slider {
+      position: absolute;
+      top: 3px;
+      left: 3px;
+      width: 24px;
+      height: 24px;
       background: #fff;
-      border-radius: 50%;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-      transition: transform .2s ease;
+      border-radius: 999px;
+      box-shadow: 0 6px 14px rgba(15,23,42,0.18);
+      transition: transform 0.25s ease;
     }
-    .toggle-switch.active .toggle-slider{ transform: translateX(24px); }
+    .toggle-switch.active .toggle-slider {
+      transform: translateX(24px);
+    }
 
     /* HERO */
-    .hero{
-      min-height: 75vh;
-      display:flex;
-      align-items:center;
-      padding: 10rem 2rem 6rem;
+    .hero {
       position: relative;
+      min-height: 78vh;
+      display: flex;
+      align-items: center;
+      padding: 8.5rem 0 4.5rem;
       overflow: hidden;
-      background: var(--accent);
+      background: #0b2a4a;
     }
-    .hero-background{ position:absolute; inset:0; z-index:0; }
-    .hero-background img{ width: 100%; height: 100%; object-fit: cover; display:block; }
-    .hero::before{
-      content:'';
-      position:absolute; inset:0;
-      background: linear-gradient(90deg, rgba(11,42,74,0.65), rgba(11,42,74,0.35));
-      z-index:1;
+    .hero-background {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
     }
-    .hero-content{
-      max-width: 1100px;
+    .hero-background img {
       width: 100%;
-      margin: 0 auto;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transform: scale(1.02);
+    }
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      background: linear-gradient(90deg, rgba(11,42,74,0.72) 0%, rgba(11,42,74,0.38) 100%);
+    }
+    .hero-content {
       position: relative;
       z-index: 2;
       text-align: center;
-      display:flex;
+      display: flex;
       flex-direction: column;
-      align-items:center;
+      align-items: center;
+      gap: 1.25rem;
     }
-    .hero h1{
-      font-size: clamp(2.75rem, 6vw, 4.5rem);
-      font-weight: 800;
-      margin-bottom: 1.25rem;
-      line-height: 1.1;
+    .hero h1 {
+      font-size: clamp(2.35rem, 5.6vw, 4.25rem);
+      line-height: 1.08;
       letter-spacing: -0.03em;
       color: #fff;
       max-width: 900px;
     }
-    .hero p{
-      font-size: clamp(1.15rem, 2vw, 1.375rem);
-      margin-bottom: 2rem;
-      color: #fff;
-      opacity: .92;
-      max-width: 700px;
+    .hero p {
+      font-size: clamp(1.05rem, 2vw, 1.3rem);
+      color: rgba(255,255,255,0.92);
+      max-width: 680px;
     }
 
-    .cta-buttons{
-      display:flex;
-      gap: 1rem;
+    /* Buttons */
+    .cta-buttons {
+      display: flex;
       flex-wrap: wrap;
+      gap: 0.9rem;
       justify-content: center;
+      margin-top: 0.35rem;
     }
-    .btn{
-      padding: 1.05rem 2.5rem;
-      font-size: 1.05rem;
-      font-weight: 700;
+    .btn {
+      appearance: none;
       border: none;
-      border-radius: 10px;
+      border-radius: 12px;
+      padding: 1rem 2.25rem;
+      font-weight: 700;
+      font-size: 1.02rem;
       cursor: pointer;
-      transition: transform .15s ease, box-shadow .2s ease, background .2s ease;
-      font-family: 'Poppins', sans-serif;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease, border-color 0.15s ease;
+      font-family: "Poppins", system-ui, -apple-system, sans-serif;
+      letter-spacing: 0.01em;
     }
-    .btn:hover{ transform: translateY(-2px); }
-    .btn:active{ transform: translateY(0); }
-    .btn-primary{
-      background: var(--button);
+    .btn:focus-visible {
+      outline: 3px solid rgba(255, 109, 0, 0.35);
+      outline-offset: 2px;
+    }
+    .btn:hover { transform: translateY(-2px); box-shadow: var(--shadow-sm); }
+    .btn:active { transform: translateY(0); box-shadow: none; }
+
+    .btn-primary {
+      background: var(--accent2);
       color: #fff;
-      box-shadow: 0 10px 24px rgba(234,88,12,0.28);
+      box-shadow: 0 10px 22px rgba(255, 109, 0, 0.25);
     }
-    .btn-primary:hover{ box-shadow: 0 14px 34px rgba(234,88,12,0.34); }
-    .btn-secondary{
-      background: transparent;
+    .btn-primary:hover { background: #f15d00; }
+
+    .btn-secondary {
+      background: rgba(255,255,255,0.12);
       color: #fff;
-      border: 2px solid #fff;
-      padding: calc(1.05rem - 2px) calc(2.5rem - 2px);
+      border: 2px solid rgba(255,255,255,0.7);
     }
-    .btn-secondary:hover{ background: rgba(255,255,255,0.14); }
+    .btn-secondary:hover { background: rgba(255,255,255,0.18); border-color: rgba(255,255,255,0.9); }
 
-    /* CONTENT / SECTIONS */
-    .content{ width: 100%; }
+    /* SECTIONS */
+    .content { width: 100%; }
 
-    .section{
-      padding: 5rem 2rem;
-      width: 100%;
+    .section {
+      padding: 4.5rem 0;
     }
-    .section:nth-of-type(1),
-    .section:nth-of-type(3),
-    .section:nth-of-type(5){
-      background: var(--section-a);
-    }
-    .section:nth-of-type(2),
-    .section:nth-of-type(4){
-      background: var(--section-b);
-    }
-    .section-inner{
-      max-width: 1200px;
-      margin: 0 auto;
+    .section.bg-a { background: var(--sectionA); }
+    .section.bg-b { background: var(--sectionB); }
+
+    .section-inner {
+      background: rgba(255,255,255,0.0);
     }
 
-    .section-title{
-      font-size: clamp(2rem, 4vw, 2.75rem);
-      font-weight: 800;
-      margin-bottom: 1.25rem;
+    .section-title {
+      font-size: clamp(1.9rem, 3.2vw, 2.6rem);
+      line-height: 1.2;
       letter-spacing: -0.02em;
-      color: var(--text);
+      margin-bottom: 1.4rem;
+      color: #111827;
       position: relative;
       display: inline-block;
+      padding-bottom: 0.6rem;
     }
-    .section-title::after{
-      content:'';
-      position:absolute;
-      left: 0; bottom: -10px;
-      width: 64px; height: 4px;
+    .section-title::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0.1rem;
+      width: 64px;
+      height: 4px;
       border-radius: 999px;
-      background: #ff6d00;
-      opacity: .95;
+      background: var(--accent2);
     }
 
-    .section-content{
-      font-size: 1.1rem;
-      line-height: 1.85;
-      margin: 1.25rem 0;
-      color: var(--text);
+    .section-content {
+      font-size: 1.08rem;
+      color: #0f172a;
+      opacity: 0.95;
+      margin-bottom: 1.05rem;
+      max-width: 950px;
     }
 
-    /* Two column */
-    .two-column-layout{
-      display:grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 2.5rem;
+    /* Two-column */
+    .two-column-layout {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 2.25rem;
       align-items: start;
-      margin-top: 2rem;
+      margin-top: 1.25rem;
     }
 
     /* Image placeholder */
-    .image-placeholder{
-      background: linear-gradient(135deg, #e0f2f7 0%, #f0f9fb 100%);
-      border: 3px dashed #68c3d4;
-      border-radius: var(--card-radius);
-      padding: 3rem 2rem;
-      width: 100%;
-      min-height: 380px;
-      display:flex;
+    .image-placeholder {
+      background: linear-gradient(135deg, rgba(226,239,255,0.85) 0%, rgba(255,255,255,0.9) 100%);
+      border: 2px dashed rgba(32,103,206,0.45);
+      border-radius: var(--radius);
+      padding: 2.5rem 1.75rem;
+      min-height: 340px;
+      display: flex;
       flex-direction: column;
-      align-items:center;
-      justify-content:center;
-      text-align:center;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      box-shadow: var(--shadow-sm);
     }
-    .image-placeholder::before{
-      content: '🖼️';
+    .image-placeholder::before {
+      content: "🖼️";
       font-size: 3.5rem;
       opacity: 0.35;
-      margin-bottom: .75rem;
+      margin-bottom: 0.75rem;
     }
-    .placeholder-number{
-      font-weight: 900;
-      font-size: 1.35rem;
-      color: #68c3d4;
-      letter-spacing: .06em;
-      margin-bottom: .6rem;
+    .placeholder-number {
+      font-weight: 800;
+      font-size: 1.05rem;
+      letter-spacing: 0.08em;
+      color: rgba(32,103,206,0.85);
+      margin-bottom: 0.35rem;
     }
-    .placeholder-text{
-      font-size: 1rem;
-      color: #4a5568;
+    .placeholder-text {
+      font-size: 0.98rem;
+      color: rgba(15,23,42,0.75);
       font-weight: 600;
+      max-width: 420px;
     }
 
     /* Highlight box */
-    .highlight-box{
+    .highlight-box {
+      margin-top: 2rem;
       background: var(--surface);
-      border-radius: var(--card-radius);
-      border: 1px solid var(--card-border);
-      border-left: 6px solid #2067ce;
-      box-shadow: var(--card-shadow);
+      border-radius: var(--radius);
       padding: 2rem;
-      margin-top: 2.25rem;
+      box-shadow: var(--shadow-sm);
+      border-left: 6px solid var(--accent);
     }
 
-    /* ✅ FIX: Cards are ALWAYS white */
-    .grid{
-      display:grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 24px;
-      margin: 2rem 0;
-      align-items: stretch;
+    /* Grid cards — FIXED: always white cards */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.25rem;
+      margin: 1.75rem 0;
     }
-    @media (max-width: 1100px){
-      .grid{ grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .card {
+      background: var(--surface);           /* ✅ THIS was the big issue */
+      border-radius: var(--radius);
+      padding: 1.65rem;
+      box-shadow: var(--shadow-sm);
+      border: 1px solid rgba(15,23,42,0.08);
+      transition: transform 0.18s ease, box-shadow 0.18s ease;
     }
-    @media (max-width: 640px){
-      .grid{ grid-template-columns: 1fr; }
+    .card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); }
+    .card h3 {
+      font-size: 1.25rem;
+      margin-bottom: 0.5rem;
+      letter-spacing: -0.01em;
+      color: #111827;
+    }
+    .card p {
+      font-size: 1rem;
+      color: rgba(15,23,42,0.78);
+      line-height: 1.65;
     }
 
-    .card{
-      background: var(--surface);            /* <— THIS is the key fix */
-      border: 1px solid var(--card-border);  /* consistent border */
-      border-radius: var(--card-radius);
-      box-shadow: var(--card-shadow);
-      padding: 28px;
-      transition: transform .2s ease, box-shadow .2s ease;
+    /* Lists */
+    .list-columns {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 0.75rem;
+      margin: 1.4rem 0 0.75rem;
+      padding-left: 0;
     }
-    .card:hover{
-      transform: translateY(-4px);
-      box-shadow: var(--card-shadow-hover);
+    .list-columns li {
+      list-style: none;
+      background: var(--surface);
+      border: 1px solid rgba(15,23,42,0.08);
+      box-shadow: var(--shadow-sm);
+      border-radius: 12px;
+      padding: 0.85rem 1rem;
+      font-weight: 700;
+      color: rgba(15,23,42,0.82);
     }
-    .card h3{
-      font-size: 1.45rem;
-      margin-bottom: .75rem;
-      font-weight: 900;
-      color: var(--text);
+
+    /* Activities tags */
+    .activities-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 0.8rem;
+      margin: 1.4rem 0 0.75rem;
+    }
+    .activity-tag {
+      background: var(--surface);
+      border: 1px solid rgba(15,23,42,0.08);
+      box-shadow: var(--shadow-sm);
+      border-radius: 14px;
+      padding: 0.95rem 0.9rem;
+      font-weight: 700;
+      text-align: center;
+      transition: transform 0.18s ease, box-shadow 0.18s ease;
+      color: rgba(15,23,42,0.85);
+    }
+    .activity-tag:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); }
+
+    /* Why choose items */
+    .why-choose-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.1rem;
+      margin-top: 1.5rem;
+    }
+    .why-choose-item {
+      background: var(--surface);
+      border: 1px solid rgba(15,23,42,0.08);
+      box-shadow: var(--shadow-sm);
+      border-radius: var(--radius);
+      padding: 1.75rem 1.5rem;
+      text-align: center;
+      transition: transform 0.18s ease, box-shadow 0.18s ease;
+    }
+    .why-choose-item:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); }
+    .why-icon { font-size: 2.25rem; margin-bottom: 0.75rem; }
+    .why-choose-item h4 {
+      font-size: 1.15rem;
+      margin-bottom: 0.35rem;
+      color: #111827;
       letter-spacing: -0.01em;
     }
-    .card p{
-      font-size: 1rem;
-      color: var(--muted);
-      line-height: 1.75;
+    .why-choose-item p {
+      font-size: 0.96rem;
+      color: rgba(15,23,42,0.75);
+      line-height: 1.55;
     }
-
-    /* Lists + activities */
-    .list-columns{
-      list-style:none;
-      display:grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 12px;
-      margin: 1.5rem 0 2rem;
-      padding: 0;
-    }
-    .list-columns li{
-      background: var(--surface);
-      border: 1px solid var(--card-border);
-      border-radius: 12px;
-      padding: .85rem 1rem;
-      box-shadow: 0 6px 16px rgba(0,0,0,0.06);
-      font-weight: 700;
-      color: #2067ce;
-    }
-
-    .activities-grid{
-      display:grid;
-      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-      gap: 12px;
-      margin: 1.5rem 0 2rem;
-    }
-    .activity-tag{
-      background: var(--surface);
-      border: 1px solid var(--card-border);
-      border-radius: 12px;
-      padding: .9rem 1rem;
-      text-align:center;
-      box-shadow: 0 6px 16px rgba(0,0,0,0.06);
-      font-weight: 700;
-      color: var(--text);
-      min-height: 56px;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      transition: transform .15s ease, box-shadow .2s ease;
-    }
-    .activity-tag:hover{
-      transform: translateY(-3px);
-      box-shadow: 0 10px 22px rgba(0,0,0,0.10);
-    }
-
-    .why-choose-grid{
-      display:grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 18px;
-      margin: 2rem 0 0;
-    }
-    .why-choose-item{
-      background: var(--surface);
-      border: 1px solid var(--card-border);
-      border-radius: var(--card-radius);
-      box-shadow: var(--card-shadow);
-      padding: 26px 22px;
-      text-align:center;
-      transition: transform .2s ease, box-shadow .2s ease;
-    }
-    .why-choose-item:hover{
-      transform: translateY(-4px);
-      box-shadow: var(--card-shadow-hover);
-    }
-    .why-icon{ font-size: 2.25rem; margin-bottom: .75rem; }
-    .why-choose-item h4{
-      font-size: 1.2rem;
-      font-weight: 900;
-      margin-bottom: .5rem;
-      color: var(--text);
-    }
-    .why-choose-item p{ color: var(--muted); font-size: .95rem; }
 
     /* Footer CTA */
-    .footer-cta{
-      text-align:center;
-      padding: 5rem 2rem;
-      background: var(--bg);
+    .footer-cta {
+      padding: 4.75rem 0;
+      background: #f8fafc;
+      text-align: center;
     }
-    .footer-inner{
-      max-width: 900px;
-      margin: 0 auto;
-    }
-    .footer-cta h2{
-      font-size: clamp(2rem, 4vw, 3rem);
-      font-weight: 900;
-      margin-bottom: 1.25rem;
+    .footer-cta h2 {
+      font-size: clamp(1.9rem, 3.2vw, 2.7rem);
       letter-spacing: -0.02em;
+      margin-bottom: 1rem;
       color: var(--accent);
     }
-    .footer-cta p{
-      font-size: 1.15rem;
-      margin-bottom: 1.25rem;
-      color: var(--text);
-      opacity: .92;
+    .footer-cta p {
+      font-size: 1.08rem;
+      color: rgba(15,23,42,0.78);
+      margin: 0 auto 1.5rem;
+      max-width: 860px;
     }
 
     /* Modal */
-    .modal-overlay{
-      display:none;
+    .modal-overlay {
+      display: none;
       position: fixed;
       inset: 0;
       background: rgba(0,0,0,0.6);
@@ -422,140 +433,122 @@
       justify-content: center;
       padding: 1rem;
     }
-    .modal-overlay.active{ display:flex; }
-
-    .modal-content{
-      background: var(--surface);
-      border-radius: 18px;
-      max-width: 640px;
+    .modal-overlay.active { display: flex; }
+    .modal-content {
+      background: #fff;
       width: 100%;
-      max-height: 90vh;
-      overflow-y: auto;
-      box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-      position: relative;
+      max-width: 640px;
+      border-radius: 18px;
+      box-shadow: 0 22px 70px rgba(0,0,0,0.35);
+      overflow: hidden;
+      max-height: 92vh;
+      display: flex;
+      flex-direction: column;
     }
-
-    .modal-header{
-      padding: 2rem 2rem 1rem;
-      border-bottom: 1px solid rgba(0,0,0,0.08);
+    .modal-header {
+      padding: 1.75rem 1.75rem 1.1rem;
+      border-bottom: 1px solid rgba(15,23,42,0.10);
       position: sticky;
       top: 0;
-      background: var(--surface);
-      z-index: 10;
-      border-radius: 18px 18px 0 0;
+      background: #fff;
+      z-index: 2;
     }
-    .modal-header h2{
-      font-size: 1.75rem;
-      font-weight: 900;
+    .modal-header h2 {
+      font-size: 1.55rem;
+      margin-bottom: 0.4rem;
       color: var(--accent);
-      margin-bottom: .5rem;
     }
-    .modal-header p{
-      font-size: .95rem;
-      color: #4b5563;
-      line-height: 1.6;
+    .modal-header p {
+      font-size: 0.95rem;
+      color: rgba(15,23,42,0.72);
     }
-    .close-modal{
-      position:absolute;
-      top: 1.25rem;
-      right: 1.25rem;
-      background:none;
-      border:none;
-      font-size: 2rem;
+    .close-modal {
+      position: absolute;
+      top: 1.1rem;
+      right: 1.1rem;
+      width: 38px;
+      height: 38px;
+      border-radius: 999px;
+      border: 1px solid rgba(15,23,42,0.12);
+      background: #fff;
+      cursor: pointer;
+      font-size: 1.4rem;
       line-height: 1;
-      cursor:pointer;
-      color: #6b7280;
-      width: 34px;
-      height: 34px;
-      display:flex;
-      align-items:center;
-      justify-content:center;
+      display: grid;
+      place-items: center;
+      transition: background 0.15s ease;
     }
-    .close-modal:hover{ color: var(--accent); }
+    .close-modal:hover { background: rgba(15,23,42,0.04); }
 
-    .modal-body{ padding: 2rem; }
+    .modal-body { padding: 1.5rem 1.75rem 1.75rem; overflow: auto; }
 
     /* Form */
-    .form-group{ margin-bottom: 1.1rem; }
-    .form-row{
-      display:grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1rem;
+    .form-group { margin-bottom: 1rem; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 0.9rem; }
+    label {
+      display: block;
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: rgba(15,23,42,0.85);
+      margin-bottom: 0.4rem;
     }
-    .form-group label{
-      display:block;
-      font-size: .9rem;
-      font-weight: 800;
-      margin-bottom: .5rem;
-      color: #374151;
-    }
-    .required{ color: #dc2626; margin-left: .25rem; }
-    .form-group input,
-    .form-group select,
-    .form-group textarea{
+    .required { color: #dc2626; margin-left: 0.2rem; }
+    input, select, textarea {
       width: 100%;
-      padding: .8rem 1rem;
+      padding: 0.75rem 0.9rem;
+      border-radius: 12px;
+      border: 1px solid rgba(15,23,42,0.18);
+      font-family: "Poppins", system-ui, -apple-system, sans-serif;
       font-size: 1rem;
-      border: 2px solid rgba(0,0,0,0.14);
-      border-radius: 12px;
-      font-family: 'Poppins', system-ui, sans-serif;
       background: #fff;
-      transition: box-shadow .15s ease, border-color .15s ease;
+      transition: box-shadow 0.15s ease, border-color 0.15s ease;
     }
-    .form-group input:focus,
-    .form-group select:focus,
-    .form-group textarea:focus{
-      outline:none;
-      border-color: var(--accent);
-      box-shadow: 0 0 0 3px rgba(30,58,138,0.14);
+    input:focus, select:focus, textarea:focus {
+      outline: none;
+      border-color: rgba(32,103,206,0.55);
+      box-shadow: 0 0 0 4px rgba(32,103,206,0.12);
     }
-    .form-group textarea{ min-height: 120px; resize: vertical; }
+    textarea { min-height: 120px; resize: vertical; }
 
-    .form-group select{
-      cursor:pointer;
-      appearance:none;
-      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23374151' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
-      background-repeat:no-repeat;
-      background-position:right 1rem center;
-      padding-right: 2.5rem;
-    }
-
-    .submit-btn{
+    .submit-btn {
       width: 100%;
-      padding: 1rem 1.25rem;
-      font-size: 1.1rem;
-      font-weight: 900;
-      background: var(--button);
-      color: #fff;
-      border:none;
+      margin-top: 0.75rem;
+      padding: 0.95rem 1.2rem;
       border-radius: 12px;
-      cursor:pointer;
-      transition: transform .15s ease, box-shadow .2s ease, background .2s ease;
-      margin-top: .75rem;
+      background: var(--accent2);
+      color: #fff;
+      font-weight: 800;
+      font-size: 1.05rem;
+      cursor: pointer;
+      border: none;
+      transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+      font-family: "Poppins", system-ui, -apple-system, sans-serif;
     }
-    .submit-btn:hover{
-      transform: translateY(-2px);
-      box-shadow: 0 12px 26px rgba(234,88,12,0.28);
-    }
-    .submit-btn:disabled{
-      background: #9ca3af;
-      cursor: not-allowed;
-      transform: none;
-      box-shadow: none;
-    }
+    .submit-btn:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); background: #f15d00; }
+    .submit-btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none; box-shadow: none; }
 
-    @media (max-width: 900px){
-      .two-column-layout{ grid-template-columns: 1fr; }
+    .success-message, .error-message { text-align: center; padding: 2.5rem 1rem; }
+    .success-message h3 { color: #16a34a; font-size: 1.5rem; margin-bottom: 0.5rem; }
+    .error-message h3 { color: #dc2626; font-size: 1.5rem; margin-bottom: 0.5rem; }
+    .success-message p, .error-message p { color: rgba(15,23,42,0.75); margin-bottom: 0.75rem; }
+    .error-details { font-size: 0.92rem; opacity: 0.85; }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      .two-column-layout { grid-template-columns: 1fr; }
+      .hero { min-height: auto; padding: 7.5rem 0 3.75rem; }
     }
-    @media (max-width: 768px){
-      .navbar{ padding: .75rem 1rem; }
-      .site-logo{ height: 36px; }
-      .hero{ padding: 7rem 1.25rem 4rem; min-height: auto; }
-      .cta-buttons{ flex-direction: column; align-items: stretch; }
-      .btn{ width: 100%; }
-      .form-row{ grid-template-columns: 1fr; }
-      .modal-body{ padding: 1.5rem; }
-      .modal-header{ padding: 1.5rem 1.5rem 1rem; }
+    @media (max-width: 768px) {
+      .navbar-content { padding: 0 1rem; }
+      .container { padding: 0 1.25rem; }
+      .form-row { grid-template-columns: 1fr; }
+      .cta-buttons { flex-direction: column; width: 100%; }
+      .btn { width: 100%; }
+      .site-logo { height: 36px; }
+      .lang-label { font-size: 0.82rem; }
+      .toggle-switch { width: 48px; height: 26px; }
+      .toggle-slider { width: 20px; height: 20px; }
+      .toggle-switch.active .toggle-slider { transform: translateX(22px); }
     }
   </style>
 </head>
@@ -573,12 +566,12 @@
         />
       </div>
 
-      <div class="language-toggle">
-        <span class="lang-label active" id="lang-en">EN</span>
-        <div class="toggle-switch" id="toggle-switch" aria-label="Toggle language">
+      <div class="language-toggle" aria-label="Language toggle">
+        <span class="lang-label active" id="lang-en" role="button" tabindex="0">EN</span>
+        <div class="toggle-switch" id="toggle-switch" role="switch" aria-checked="false" tabindex="0">
           <div class="toggle-slider"></div>
         </div>
-        <span class="lang-label" id="lang-es">ES</span>
+        <span class="lang-label" id="lang-es" role="button" tabindex="0">ES</span>
       </div>
     </div>
   </nav>
@@ -594,12 +587,11 @@
         />
       </div>
 
-      <div class="hero-content">
+      <div class="container hero-content">
         <h1 id="main-title">Community Engagement Program</h1>
         <p id="subtitle">
           A supportive weekday program where adults with disabilities build friendships, explore new interests, and connect with their community.
         </p>
-
         <div class="cta-buttons">
           <button class="btn btn-primary" id="primary-button" type="button">Learn How to Join</button>
           <button class="btn btn-secondary" id="secondary-button" type="button">View Our Location</button>
@@ -609,10 +601,10 @@
 
     <!-- MAIN CONTENT -->
     <div class="content">
-      <!-- About -->
-      <section class="section">
-        <div class="section-inner">
-          <h2 class="section-title" id="about-title">About the Community Engagement Program</h2>
+      <!-- ABOUT -->
+      <section class="section bg-a">
+        <div class="container section-inner">
+          <h2 class="section-title" id="about-title">What to Expect</h2>
 
           <div class="two-column-layout">
             <div class="column-left">
@@ -624,72 +616,71 @@
 
             <div class="column-right">
               <p class="section-content" id="about-p1">
-                The Community Engagement Program at Options For All is a supportive day program where participants can build friendships, explore interests, and take part in meaningful activities within their community.
+                At Options For All, every day is an opportunity to connect, grow, and thrive. Our Community Engagement Program provides a welcoming space where adults with disabilities can build meaningful friendships, discover new passions, and participate actively in their local community.
               </p>
               <p class="section-content" id="about-p2">
-                The program runs Monday through Friday from 8:00 AM to 1:00 PM and includes transportation for both morning pick-up and afternoon return. Transportation schedules are coordinated based on participant location.
+                We meet Monday through Friday from 8:00 AM to 1:00 PM. Door-to-door transportation is included. We'll pick you up in the morning and bring you home in the afternoon. Routes are personalized based on where you live.
               </p>
             </div>
           </div>
 
           <div class="highlight-box" id="highlight-box">
             <p class="section-content" id="highlight-p1">
-              Each day is thoughtfully planned to reflect individual interests and preferences. Participants are encouraged to try new activities, build confidence, and stay engaged in a welcoming, structured environment.
+              Every person brings unique strengths and interests. That's why we create individualized daily plans that honor what matters most to each participant. Whether you want to try something brand new or dive deeper into a favorite activity, our caring team is here to support you every step of the way.
             </p>
             <p class="section-content" id="highlight-p2">
-              With more than 40 years of experience, Options For All is known for creating inclusive programs led by caring, well-trained staff who focus on connection, respect, and belonging.
+              For over 40 years, Options For All has been a trusted partner for families across San Diego. Our experienced, compassionate staff create an environment where everyone belongs, every voice is heard, and every day brings new possibilities.
             </p>
           </div>
         </div>
       </section>
 
-      <!-- Who -->
-      <section class="section">
-        <div class="section-inner">
-          <h2 class="section-title" id="who-title">Who the Program Is For</h2>
-          <p class="section-content" id="who-intro">The Community Engagement Program may be a great fit for individuals who:</p>
+      <!-- WHO -->
+      <section class="section bg-b">
+        <div class="container section-inner">
+          <h2 class="section-title" id="who-title">Is This Program Right for You?</h2>
+          <p class="section-content" id="who-intro">Our Community Engagement Program welcomes adults with disabilities who are:</p>
 
           <div class="grid">
             <div class="card" id="card-1">
-              <h3 id="card-1-title">Structure &amp; Routine</h3>
-              <p id="card-1-text">Looking for a weekday program with consistent structure and routine</p>
+              <h3 id="card-1-title">Seeking Connection</h3>
+              <p id="card-1-text">Ready to build friendships and feel part of a supportive community</p>
             </div>
 
             <div class="card" id="card-2">
-              <h3 id="card-2-title">Small Groups</h3>
-              <p id="card-2-text">Enjoy participating in small group activities</p>
+              <h3 id="card-2-title">Enjoying Structure</h3>
+              <p id="card-2-text">Thriving with a consistent weekday routine and organized activities</p>
             </div>
 
             <div class="card" id="card-3">
-              <h3 id="card-3-title">Skill Building</h3>
-              <p id="card-3-text">Want opportunities to socialize and build everyday skills</p>
+              <h3 id="card-3-title">Exploring Interests</h3>
+              <p id="card-3-text">Excited to try new things and develop skills in a fun, low-pressure setting</p>
             </div>
 
             <div class="card" id="card-4">
-              <h3 id="card-4-title">Community Connection</h3>
-              <p id="card-4-text">Are interested in being active in their local community</p>
+              <h3 id="card-4-title">Staying Active</h3>
+              <p id="card-4-text">Wanting to get out, stay engaged, and participate in their local community</p>
             </div>
           </div>
 
           <p class="section-content" id="who-outro">
-            Our team is happy to help answer questions and explore whether the program is a good match.
+            Not sure if it's the right fit? We're here to talk through your questions and help you explore what works best for you or your loved one.
           </p>
         </div>
       </section>
 
-      <!-- About org -->
-      <section class="section">
-        <div class="section-inner">
+      <!-- ABOUT ORG -->
+      <section class="section bg-a">
+        <div class="container section-inner">
           <h2 class="section-title" id="org-title">About Options For All</h2>
-
           <p class="section-content" id="org-p1">
             Options For All is a nonprofit organization with more than 40 years of experience supporting individuals and families through high-quality, community-based programs.
           </p>
           <p class="section-content" id="org-p2">
-            We are committed to creating inclusive, welcoming spaces where people feel valued, supported, and connected.
+            We are committed to creating inclusive, welcoming spaces where people feel valued, supported, and connected. Our programs are built around consistency, relationship-building, and person-centered support, allowing participants to grow at their own pace while staying actively engaged in their communities.
           </p>
           <p class="section-content" id="org-p3">
-            Families choose Options For All because of experienced staff, thoughtful programming, and deep commitment to belonging and inclusion.
+            Our long-standing presence in the community reflects our focus on quality, trust, and meaningful outcomes. Families choose Options For All because of our experienced staff, thoughtful programming, and deep commitment to belonging and inclusion.
           </p>
 
           <div class="why-choose-grid">
@@ -720,11 +711,13 @@
         </div>
       </section>
 
-      <!-- Communities -->
-      <section class="section">
-        <div class="section-inner">
-          <h2 class="section-title" id="communities-title">Communities We Serve</h2>
-          <p class="section-content" id="communities-intro">We welcome participants from Chula Vista and nearby communities, including:</p>
+      <!-- COMMUNITIES -->
+      <section class="section bg-b">
+        <div class="container section-inner">
+          <h2 class="section-title" id="communities-title">Serving Your Neighborhood</h2>
+          <p class="section-content" id="communities-intro">
+            We proudly welcome participants from Chula Vista and surrounding South Bay communities:
+          </p>
 
           <ul class="list-columns" id="communities-list">
             <li>Chula Vista</li>
@@ -737,30 +730,32 @@
             <li>South San Diego</li>
           </ul>
 
-          <p class="section-content" id="communities-outro">Transportation is available and coordinated based on location.</p>
+          <p class="section-content" id="communities-outro">
+            Live nearby? We'd love to connect with you. Transportation is included and tailored to your location.
+          </p>
         </div>
       </section>
 
-      <!-- Activities -->
-      <section class="section">
-        <div class="section-inner">
-          <h2 class="section-title" id="activities-title">Activities and Enrichment</h2>
+      <!-- ACTIVITIES -->
+      <section class="section bg-a">
+        <div class="container section-inner">
+          <h2 class="section-title" id="activities-title">How We Spend Our Days</h2>
           <p class="section-content" id="activities-intro">
-            Participants enjoy a variety of engaging activities designed to encourage movement, creativity, and social connection, such as:
+            Every week brings variety, movement, creativity, and connection. Our activities include:
           </p>
 
           <div class="activities-grid" id="activities-grid">
             <div class="activity-tag">Zumba</div>
             <div class="activity-tag">Fitness Club</div>
-            <div class="activity-tag" id="activity-cooking">Cooking Activities</div>
-            <div class="activity-tag" id="activity-arts">Arts and Crafts</div>
+            <div class="activity-tag" id="activity-cooking">Cooking Together</div>
+            <div class="activity-tag" id="activity-arts">Arts &amp; Crafts</div>
             <div class="activity-tag">Bingo</div>
-            <div class="activity-tag" id="activity-sports">Sports Day</div>
+            <div class="activity-tag" id="activity-sports">Sports &amp; Games</div>
             <div class="activity-tag">Lego Club</div>
           </div>
 
           <p class="section-content" id="activities-outro">
-            Activities may vary and are designed to keep each day active, fun, and engaging.
+            Activities rotate regularly to keep things fresh, fun, and engaging for everyone.
           </p>
         </div>
       </section>
@@ -768,31 +763,27 @@
 
     <!-- FOOTER CTA -->
     <section class="footer-cta" id="footer-cta">
-      <div class="footer-inner">
-        <h2 id="contact-title">Ready to Learn More?</h2>
+      <div class="container">
+        <h2 id="contact-title">Let's Start the Conversation</h2>
         <p id="contact-subtitle">
-          We're here to answer your questions and help you explore whether the Community Engagement Program is the right fit.
+          We're here to answer your questions and help you explore whether the Community Engagement Program is the right fit. Our team can walk you through the enrollment process, discuss transportation options, and connect you with resources.
         </p>
-        <p id="contact-methods">
-          You can reach us at <strong>referrals@optionsforall.org</strong> or click the button below.
-        </p>
-
+        <p id="contact-methods">You can reach us at <strong>referrals@optionsforall.org</strong> or click the button below.</p>
         <div class="cta-buttons">
           <button class="btn btn-primary" id="contact-button" type="button">Get in Touch</button>
         </div>
       </div>
     </section>
+
   </div>
 
   <!-- MODAL -->
   <div class="modal-overlay" id="contactModal" aria-hidden="true">
     <div class="modal-content" role="dialog" aria-modal="true" aria-labelledby="modal-title">
       <div class="modal-header">
-        <button class="close-modal" id="closeModal" aria-label="Close form" type="button">×</button>
+        <button class="close-modal" id="closeModal" aria-label="Close form">×</button>
         <h2 id="modal-title">Get in Touch</h2>
-        <p id="modal-intro">
-          Please fill out the fields below to have one of our team members assist you or contact your local Regional Center service coordinator.
-        </p>
+        <p id="modal-intro">Please fill out the fields below to have one of our team members assist you or contact your local Regional Center service coordinator.</p>
       </div>
 
       <div class="modal-body" id="modalBody">
@@ -862,9 +853,9 @@
   </div>
 
   <script>
-    /* ========================================
-       EMAILJS CONFIGURATION
-       ======================================== */
+    // ========================================
+    // EMAIL.JS CONFIGURATION
+    // ========================================
     const EMAILJS_CONFIG = {
       PUBLIC_KEY: 'YOUR_PUBLIC_KEY_HERE',
       SERVICE_ID: 'YOUR_SERVICE_ID_HERE',
@@ -875,215 +866,383 @@
       emailjs.init(EMAILJS_CONFIG.PUBLIC_KEY);
     }
 
-    /* ========================================
-       TRANSLATIONS (kept from your original)
-       ======================================== */
-    const translations = /* paste your existing translations object here */ window.translations || null;
+    // ========================================
+    // TRANSLATIONS
+    // ========================================
+    const translations = {
+      en: {
+        main_title: 'Community Engagement Program',
+        subtitle: 'A supportive weekday program where adults with disabilities build friendships, explore new interests, and connect with their community.',
+        primary_button: 'Learn How to Join',
+        secondary_button: 'View Our Location',
 
-    // If you want, you can keep your existing translations object exactly as-is.
-    // For now, we’ll only toggle EN/ES using your original updateContent() if it exists.
+        about_title: 'What to Expect',
+        about_p1: 'At Options For All, every day is an opportunity to connect, grow, and thrive. Our Community Engagement Program provides a welcoming space where adults with disabilities can build meaningful friendships, discover new passions, and participate actively in their local community.',
+        about_p2: 'We meet Monday through Friday from 8:00 AM to 1:00 PM. Door-to-door transportation is included. We\'ll pick you up in the morning and bring you home in the afternoon. Routes are personalized based on where you live.',
+        highlight_p1: 'Every person brings unique strengths and interests. That\'s why we create individualized daily plans that honor what matters most to each participant. Whether you want to try something brand new or dive deeper into a favorite activity, our caring team is here to support you every step of the way.',
+        highlight_p2: 'For over 40 years, Options For All has been a trusted partner for families across San Diego. Our experienced, compassionate staff create an environment where everyone belongs, every voice is heard, and every day brings new possibilities.',
+
+        who_title: 'Is This Program Right for You?',
+        who_intro: 'Our Community Engagement Program welcomes adults with disabilities who are:',
+        card_1_title: 'Seeking Connection',
+        card_1_text: 'Ready to build friendships and feel part of a supportive community',
+        card_2_title: 'Enjoying Structure',
+        card_2_text: 'Thriving with a consistent weekday routine and organized activities',
+        card_3_title: 'Exploring Interests',
+        card_3_text: 'Excited to try new things and develop skills in a fun, low-pressure setting',
+        card_4_title: 'Staying Active',
+        card_4_text: 'Wanting to get out, stay engaged, and participate in their local community',
+        who_outro: 'Not sure if it\'s the right fit? We\'re here to talk through your questions and help you explore what works best for you or your loved one.',
+
+        org_title: 'About Options For All',
+        org_p1: 'Options For All is a nonprofit organization with more than 40 years of experience supporting individuals and families through high-quality, community-based programs.',
+        org_p2: 'We are committed to creating inclusive, welcoming spaces where people feel valued, supported, and connected. Our programs are built around consistency, relationship-building, and person-centered support, allowing participants to grow at their own pace while staying actively engaged in their communities.',
+        org_p3: 'Our long-standing presence in the community reflects our focus on quality, trust, and meaningful outcomes. Families choose Options For All because of our experienced staff, thoughtful programming, and deep commitment to belonging and inclusion.',
+        why_1_title: '40+ Years of Experience',
+        why_1_text: 'Decades of community-based support and trusted partnerships',
+        why_2_title: 'Compassionate Team',
+        why_2_text: 'Consistent, well-trained staff who truly care',
+        why_3_title: 'Person-Centered Approach',
+        why_3_text: 'Programs designed around individual interests and strengths',
+        why_4_title: 'Community Focus',
+        why_4_text: 'Strong emphasis on connection, routine, and involvement',
+
+        communities_title: 'Serving Your Neighborhood',
+        communities_intro: 'We proudly welcome participants from Chula Vista and surrounding South Bay communities:',
+        communities_outro: 'Live nearby? We\'d love to connect with you. Transportation is included and tailored to your location.',
+
+        activities_title: 'How We Spend Our Days',
+        activities_intro: 'Every week brings variety, movement, creativity, and connection. Our activities include:',
+        activity_cooking: 'Cooking Together',
+        activity_arts: 'Arts & Crafts',
+        activity_sports: 'Sports & Games',
+        activities_outro: 'Activities rotate regularly to keep things fresh, fun, and engaging for everyone.',
+
+        contact_title: 'Let\'s Start the Conversation',
+        contact_subtitle: 'We\'re here to answer your questions and help you explore whether the Community Engagement Program is the right fit. Our team can walk you through the enrollment process, discuss transportation options, and connect you with resources.',
+        contact_methods: 'You can reach us at <strong>referrals@optionsforall.org</strong> or click the button below.',
+        contact_button: 'Get in Touch',
+
+        img_2_text: 'Daily activities - Participants engaging together'
+      },
+
+      es: {
+        main_title: 'Programa de Participación Comunitaria',
+        subtitle: 'Un programa de apoyo entre semana donde adultos con discapacidades construyen amistades, exploran nuevos intereses y se conectan con su comunidad.',
+        primary_button: 'Cómo Participar',
+        secondary_button: 'Ver Nuestra Ubicación',
+
+        about_title: 'Qué Esperar',
+        about_p1: 'En Options For All, cada día es una oportunidad para conectar, crecer y prosperar. Nuestro Programa de Participación Comunitaria ofrece un espacio acogedor donde adultos con discapacidades pueden construir amistades significativas, descubrir nuevas pasiones y participar activamente en su comunidad local.',
+        about_p2: 'Nos reunimos de lunes a viernes de 8:00 AM a 1:00 PM. El transporte puerta a puerta está incluido. Lo recogemos por la mañana y lo llevamos a casa por la tarde. Las rutas se personalizan según donde vive.',
+        highlight_p1: 'Cada persona trae fortalezas e intereses únicos. Por eso creamos planes diarios individualizados que honran lo que más le importa a cada participante. Ya sea que quiera probar algo completamente nuevo o profundizar en una actividad favorita, nuestro equipo está aquí para apoyarlo en cada paso.',
+        highlight_p2: 'Durante más de 40 años, Options For All ha sido un socio de confianza para familias en todo San Diego. Nuestro personal experimentado y compasivo crea un ambiente donde todos pertenecen, cada voz es escuchada, y cada día trae nuevas posibilidades.',
+
+        who_title: '¿Es Este Programa Adecuado Para Usted?',
+        who_intro: 'Nuestro Programa de Participación Comunitaria da la bienvenida a adultos con discapacidades que están:',
+        card_1_title: 'Buscando Conexión',
+        card_1_text: 'Listos para construir amistades y sentirse parte de una comunidad de apoyo',
+        card_2_title: 'Disfrutando Estructura',
+        card_2_text: 'Prosperando con una rutina semanal consistente y actividades organizadas',
+        card_3_title: 'Explorando Intereses',
+        card_3_text: 'Emocionados por probar cosas nuevas y desarrollar habilidades en un ambiente divertido y sin presión',
+        card_4_title: 'Manteniéndose Activos',
+        card_4_text: 'Queriendo salir, mantenerse comprometidos y participar en su comunidad local',
+        who_outro: '¿No está seguro si es lo adecuado? Estamos aquí para hablar sobre sus preguntas y ayudarle a explorar lo que funciona mejor para usted o su ser querido.',
+
+        org_title: 'Acerca de Options For All',
+        org_p1: 'Options For All es una organización sin fines de lucro con más de 40 años de experiencia apoyando a individuos y familias a través de programas comunitarios de alta calidad.',
+        org_p2: 'Estamos comprometidos a crear espacios inclusivos y acogedores donde las personas se sientan valoradas, apoyadas y conectadas. Nuestros programas se construyen en torno a la consistencia, la construcción de relaciones y el apoyo centrado en la persona, permitiendo que los participantes crezcan a su propio ritmo mientras se mantienen activamente comprometidos en sus comunidades.',
+        org_p3: 'Nuestra presencia de larga data en la comunidad refleja nuestro enfoque en la calidad, la confianza y los resultados significativos. Las familias eligen Options For All por nuestro personal experimentado, programación reflexiva y profundo compromiso con la pertenencia y la inclusión.',
+        why_1_title: '40+ Años de Experiencia',
+        why_1_text: 'Décadas de apoyo comunitario y asociaciones de confianza',
+        why_2_title: 'Equipo Compasivo',
+        why_2_text: 'Personal consistente, bien capacitado y que realmente se preocupa',
+        why_3_title: 'Enfoque Centrado en la Persona',
+        why_3_text: 'Programas diseñados en torno a intereses y fortalezas individuales',
+        why_4_title: 'Enfoque Comunitario',
+        why_4_text: 'Fuerte énfasis en la conexión, la rutina y la participación',
+
+        communities_title: 'Sirviendo Su Vecindario',
+        communities_intro: 'Con orgullo damos la bienvenida a participantes de Chula Vista y comunidades cercanas del South Bay:',
+        communities_outro: '¿Vive cerca? Nos encantaría conectarnos con usted. El transporte está incluido y adaptado a su ubicación.',
+
+        activities_title: 'Cómo Pasamos Nuestros Días',
+        activities_intro: 'Cada semana trae variedad, movimiento, creatividad y conexión. Nuestras actividades incluyen:',
+        activity_cooking: 'Cocinando Juntos',
+        activity_arts: 'Artes y Manualidades',
+        activity_sports: 'Deportes y Juegos',
+        activities_outro: 'Las actividades rotan regularmente para mantener todo fresco, divertido y atractivo para todos.',
+
+        contact_title: 'Comencemos la Conversación',
+        contact_subtitle: 'Estamos aquí para responder sus preguntas y ayudarle a explorar si el Programa de Participación Comunitaria es el adecuado. Nuestro equipo puede explicarle el proceso de inscripción, discutir las opciones de transporte y conectarlo con recursos.',
+        contact_methods: 'Puede comunicarse con nosotros a <strong>referrals@optionsforall.org</strong> o haga clic en el botón a continuación.',
+        contact_button: 'Contáctenos',
+
+        img_2_text: 'Actividades diarias - Participantes interactuando juntos'
+      }
+    };
 
     let currentLang = 'en';
 
-    /* ========================================
-       ELEMENT SDK THEME HOOK (clean + consistent)
-       - sets CSS variables instead of random inline styles
-       ======================================== */
-    const defaultConfig = {
-      background_color: '#f8fafc',
-      accent_color: '#1e3a8a',
-      surface_color: '#ffffff',
-      text_color: '#211c1d',
-      button_color: '#ea580c',
-      font_family: 'Poppins',
-      font_size: 16
-    };
+    function updateContent(lang) {
+      const content = translations[lang];
+      if (!content) return;
 
-    function applyCssVars(config){
-      const root = document.documentElement;
-      root.style.setProperty('--bg', config.background_color || defaultConfig.background_color);
-      root.style.setProperty('--accent', config.accent_color || defaultConfig.accent_color);
-      root.style.setProperty('--surface', config.surface_color || defaultConfig.surface_color);
-      root.style.setProperty('--text', config.text_color || defaultConfig.text_color);
-      root.style.setProperty('--button', config.button_color || defaultConfig.button_color);
+      // Main
+      document.getElementById('main-title').textContent = content.main_title;
+      document.getElementById('subtitle').textContent = content.subtitle;
+      document.getElementById('primary-button').textContent = content.primary_button;
+      document.getElementById('secondary-button').textContent = content.secondary_button;
 
-      document.body.style.fontFamily = `${config.font_family || defaultConfig.font_family}, system-ui, -apple-system, sans-serif`;
-      document.body.style.fontSize = `${config.font_size || defaultConfig.font_size}px`;
+      // About
+      document.getElementById('about-title').textContent = content.about_title;
+      document.getElementById('about-p1').textContent = content.about_p1;
+      document.getElementById('about-p2').textContent = content.about_p2;
+      document.getElementById('highlight-p1').textContent = content.highlight_p1;
+      document.getElementById('highlight-p2').textContent = content.highlight_p2;
+
+      // Who
+      document.getElementById('who-title').textContent = content.who_title;
+      document.getElementById('who-intro').textContent = content.who_intro;
+      document.getElementById('card-1-title').textContent = content.card_1_title;
+      document.getElementById('card-1-text').textContent = content.card_1_text;
+      document.getElementById('card-2-title').textContent = content.card_2_title;
+      document.getElementById('card-2-text').textContent = content.card_2_text;
+      document.getElementById('card-3-title').textContent = content.card_3_title;
+      document.getElementById('card-3-text').textContent = content.card_3_text;
+      document.getElementById('card-4-title').textContent = content.card_4_title;
+      document.getElementById('card-4-text').textContent = content.card_4_text;
+      document.getElementById('who-outro').textContent = content.who_outro;
+
+      // Org
+      document.getElementById('org-title').textContent = content.org_title;
+      document.getElementById('org-p1').textContent = content.org_p1;
+      document.getElementById('org-p2').textContent = content.org_p2;
+      document.getElementById('org-p3').textContent = content.org_p3;
+      document.getElementById('why-1-title').textContent = content.why_1_title;
+      document.getElementById('why-1-text').textContent = content.why_1_text;
+      document.getElementById('why-2-title').textContent = content.why_2_title;
+      document.getElementById('why-2-text').textContent = content.why_2_text;
+      document.getElementById('why-3-title').textContent = content.why_3_title;
+      document.getElementById('why-3-text').textContent = content.why_3_text;
+      document.getElementById('why-4-title').textContent = content.why_4_title;
+      document.getElementById('why-4-text').textContent = content.why_4_text;
+
+      // Communities
+      document.getElementById('communities-title').textContent = content.communities_title;
+      document.getElementById('communities-intro').textContent = content.communities_intro;
+      document.getElementById('communities-outro').textContent = content.communities_outro;
+
+      // Activities
+      document.getElementById('activities-title').textContent = content.activities_title;
+      document.getElementById('activities-intro').textContent = content.activities_intro;
+      document.getElementById('activity-cooking').textContent = content.activity_cooking;
+      document.getElementById('activity-arts').textContent = content.activity_arts;
+      document.getElementById('activity-sports').textContent = content.activity_sports;
+      document.getElementById('activities-outro').textContent = content.activities_outro;
+
+      // Footer CTA
+      document.getElementById('contact-title').textContent = content.contact_title;
+      document.getElementById('contact-subtitle').textContent = content.contact_subtitle;
+      document.getElementById('contact-methods').innerHTML = content.contact_methods;
+      document.getElementById('contact-button').textContent = content.contact_button;
+
+      // Placeholder
+      const img2 = document.getElementById('img-2-text');
+      if (img2) img2.textContent = content.img_2_text;
+
+      // Toggle UI state
+      document.getElementById('lang-en').classList.toggle('active', lang === 'en');
+      document.getElementById('lang-es').classList.toggle('active', lang === 'es');
+      document.getElementById('toggle-switch').classList.toggle('active', lang === 'es');
+      document.getElementById('toggle-switch').setAttribute('aria-checked', String(lang === 'es'));
     }
 
-    async function onConfigChange(config){
-      applyCssVars(config);
+    function setLang(lang) {
+      currentLang = lang;
+      updateContent(currentLang);
     }
 
-    function mapToCapabilities(config) {
-      return {
-        recolorables: [
-          { get: () => config.background_color || defaultConfig.background_color, set: (v) => (config.background_color = v, window.elementSdk?.setConfig({ background_color: v })) },
-          { get: () => config.accent_color || defaultConfig.accent_color,         set: (v) => (config.accent_color = v,     window.elementSdk?.setConfig({ accent_color: v })) },
-          { get: () => config.surface_color || defaultConfig.surface_color,       set: (v) => (config.surface_color = v,   window.elementSdk?.setConfig({ surface_color: v })) },
-          { get: () => config.text_color || defaultConfig.text_color,             set: (v) => (config.text_color = v,      window.elementSdk?.setConfig({ text_color: v })) },
-          { get: () => config.button_color || defaultConfig.button_color,         set: (v) => (config.button_color = v,    window.elementSdk?.setConfig({ button_color: v })) }
-        ],
-        borderables: [],
-        fontEditable: {
-          get: () => config.font_family || defaultConfig.font_family,
-          set: (v) => (config.font_family = v, window.elementSdk?.setConfig({ font_family: v }))
-        },
-        fontSizeable: {
-          get: () => config.font_size || defaultConfig.font_size,
-          set: (v) => (config.font_size = v, window.elementSdk?.setConfig({ font_size: v }))
-        }
-      };
-    }
-
-    function mapToEditPanelValues(config) {
-      return new Map([]);
-    }
-
-    if (window.elementSdk) {
-      window.elementSdk.init({
-        defaultConfig,
-        onConfigChange,
-        mapToCapabilities,
-        mapToEditPanelValues
-      });
-    } else {
-      applyCssVars(defaultConfig);
-    }
-
-    /* ========================================
-       Language toggle (uses your existing updateContent if present)
-       ======================================== */
-    function safeUpdateContent(lang){
-      if (typeof updateContent === 'function') {
-        updateContent(lang);
-        return;
-      }
-      // Minimal fallback: just toggles labels
-      document.getElementById('lang-en')?.classList.toggle('active', lang === 'en');
-      document.getElementById('lang-es')?.classList.toggle('active', lang === 'es');
-      document.getElementById('toggle-switch')?.classList.toggle('active', lang === 'es');
-    }
-
+    // Toggle click
     document.getElementById('toggle-switch').addEventListener('click', () => {
-      currentLang = currentLang === 'en' ? 'es' : 'en';
-      safeUpdateContent(currentLang);
+      setLang(currentLang === 'en' ? 'es' : 'en');
     });
 
-    document.getElementById('lang-en').addEventListener('click', () => {
-      currentLang = 'en';
-      safeUpdateContent(currentLang);
+    // Toggle keyboard
+    document.getElementById('toggle-switch').addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        setLang(currentLang === 'en' ? 'es' : 'en');
+      }
     });
 
-    document.getElementById('lang-es').addEventListener('click', () => {
-      currentLang = 'es';
-      safeUpdateContent(currentLang);
+    // Labels click/keyboard
+    document.getElementById('lang-en').addEventListener('click', () => setLang('en'));
+    document.getElementById('lang-es').addEventListener('click', () => setLang('es'));
+    document.getElementById('lang-en').addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setLang('en'); }
+    });
+    document.getElementById('lang-es').addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setLang('es'); }
     });
 
-    /* ========================================
-       Modal + buttons
-       ======================================== */
+    // Initialize default content
+    updateContent(currentLang);
+
+    // ========================================
+    // MODAL + BUTTONS
+    // ========================================
     const modal = document.getElementById('contactModal');
     const closeModalBtn = document.getElementById('closeModal');
+    const contactForm = document.getElementById('contactForm');
     const submitBtn = document.getElementById('submitBtn');
     const modalBody = document.getElementById('modalBody');
 
-    function openModal(){
+    function openModal() {
       modal.classList.add('active');
-      modal.setAttribute('aria-hidden','false');
+      modal.setAttribute('aria-hidden', 'false');
       document.body.style.overflow = 'hidden';
-      document.getElementById('firstName')?.focus();
     }
-    function closeModal(){
+
+    function closeModal() {
       modal.classList.remove('active');
-      modal.setAttribute('aria-hidden','true');
+      modal.setAttribute('aria-hidden', 'true');
       document.body.style.overflow = '';
+      // Reset modal content back to form (in case success/error replaced it)
+      setTimeout(() => {
+        modalBody.innerHTML = contactForm.outerHTML;
+        attachFormSubmitListener();
+      }, 250);
     }
 
     document.getElementById('primary-button').addEventListener('click', openModal);
     document.getElementById('contact-button').addEventListener('click', openModal);
 
-    document.getElementById('secondary-button').addEventListener('click', function() {
-      const communitiesSection = document.querySelector('#communities-title')?.closest('.section');
-      communitiesSection?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    document.getElementById('secondary-button').addEventListener('click', () => {
+      const section = document.getElementById('communities-title').closest('.section');
+      section.scrollIntoView({ behavior: 'smooth', block: 'start' });
     });
 
     closeModalBtn.addEventListener('click', closeModal);
     modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
-    document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && modal.classList.contains('active')) closeModal(); });
-
-    /* ========================================
-       Form submit (same behavior, simplified)
-       ======================================== */
-    document.getElementById('contactForm').addEventListener('submit', async function(e){
-      e.preventDefault();
-
-      const notConfigured =
-        EMAILJS_CONFIG.PUBLIC_KEY === 'YOUR_PUBLIC_KEY_HERE' ||
-        EMAILJS_CONFIG.SERVICE_ID === 'YOUR_SERVICE_ID_HERE' ||
-        EMAILJS_CONFIG.TEMPLATE_ID === 'YOUR_TEMPLATE_ID_HERE';
-
-      if (notConfigured) {
-        modalBody.innerHTML = `
-          <div style="text-align:center; padding: 1.5rem;">
-            <h3 style="font-size:1.35rem; font-weight:900; color:#dc2626; margin-bottom:.75rem;">Configuration Required</h3>
-            <p style="color:#4b5563; line-height:1.7; margin-bottom:1rem;">
-              EmailJS credentials are not set yet. Please update <strong>PUBLIC_KEY</strong>, <strong>SERVICE_ID</strong>, and <strong>TEMPLATE_ID</strong> in the code.
-            </p>
-            <p style="color:#4b5563; line-height:1.7; margin-bottom:1.5rem;">
-              For now, email <strong>referrals@optionsforall.org</strong>.
-            </p>
-            <button class="btn btn-primary" type="button" onclick="document.getElementById('closeModal').click()">Close</button>
-          </div>
-        `;
-        return;
-      }
-
-      submitBtn.disabled = true;
-      submitBtn.textContent = currentLang === 'en' ? 'Sending...' : 'Enviando...';
-
-      const formData = {
-        from_name: `${document.getElementById('firstName').value} ${document.getElementById('lastName').value}`,
-        firstName: document.getElementById('firstName').value,
-        lastName: document.getElementById('lastName').value,
-        contactType: document.getElementById('contactType').value,
-        reply_to: document.getElementById('email').value,
-        email: document.getElementById('email').value,
-        phone: document.getElementById('phone').value,
-        city: document.getElementById('city').value,
-        zip: document.getElementById('zip').value,
-        referral: document.getElementById('referral').value,
-        message: document.getElementById('details').value
-      };
-
-      try {
-        await emailjs.send(EMAILJS_CONFIG.SERVICE_ID, EMAILJS_CONFIG.TEMPLATE_ID, formData);
-
-        modalBody.innerHTML = `
-          <div style="text-align:center; padding: 2rem;">
-            <h3 style="font-size:1.6rem; font-weight:900; color:#16a34a; margin-bottom:.75rem;">Message Sent!</h3>
-            <p style="color:#4b5563; line-height:1.7; margin-bottom:1.5rem;">
-              Thank you. We received your message and will follow up soon.
-            </p>
-            <button class="btn btn-primary" type="button" onclick="location.reload()">Close</button>
-          </div>
-        `;
-      } catch (err) {
-        modalBody.innerHTML = `
-          <div style="text-align:center; padding: 2rem;">
-            <h3 style="font-size:1.6rem; font-weight:900; color:#dc2626; margin-bottom:.75rem;">Something went wrong</h3>
-            <p style="color:#4b5563; line-height:1.7; margin-bottom:1.5rem;">
-              Please try again or email <strong>referrals@optionsforall.org</strong>.
-            </p>
-            <button class="btn btn-primary" type="button" onclick="location.reload()">Close</button>
-          </div>
-        `;
-        console.error(err);
-      } finally {
-        submitBtn.disabled = false;
-        submitBtn.textContent = 'Submit';
-      }
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && modal.classList.contains('active')) closeModal();
     });
+
+    // ========================================
+    // FORM SUBMIT (EmailJS)
+    // ========================================
+    function attachFormSubmitListener() {
+      const form = document.getElementById('contactForm');
+      if (!form) return;
+
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        // Check if Email.js is configured
+        if (
+          EMAILJS_CONFIG.PUBLIC_KEY === 'YOUR_PUBLIC_KEY_HERE' ||
+          EMAILJS_CONFIG.SERVICE_ID === 'YOUR_SERVICE_ID_HERE' ||
+          EMAILJS_CONFIG.TEMPLATE_ID === 'YOUR_TEMPLATE_ID_HERE'
+        ) {
+          const errorHTML = currentLang === 'en'
+            ? `
+              <div class="error-message">
+                <h3>⚙️ Configuration Required</h3>
+                <p>EmailJS is not configured yet. Please add your EmailJS keys in the code.</p>
+                <p>For now, email us at <strong>referrals@optionsforall.org</strong>.</p>
+                <button class="btn btn-primary" type="button" onclick="document.getElementById('closeModal').click()">Close</button>
+              </div>
+            `
+            : `
+              <div class="error-message">
+                <h3>⚙️ Configuración Requerida</h3>
+                <p>EmailJS aún no está configurado. Agregue sus claves de EmailJS en el código.</p>
+                <p>Por ahora, envíenos un correo a <strong>referrals@optionsforall.org</strong>.</p>
+                <button class="btn btn-primary" type="button" onclick="document.getElementById('closeModal').click()">Cerrar</button>
+              </div>
+            `;
+          modalBody.innerHTML = errorHTML;
+          return;
+        }
+
+        const submitBtnLocal = document.getElementById('submitBtn');
+        submitBtnLocal.disabled = true;
+        submitBtnLocal.textContent = currentLang === 'en' ? 'Sending...' : 'Enviando...';
+
+        const formData = {
+          from_name: `${document.getElementById('firstName').value} ${document.getElementById('lastName').value}`,
+          firstName: document.getElementById('firstName').value,
+          lastName: document.getElementById('lastName').value,
+          contactType: document.getElementById('contactType').value,
+          reply_to: document.getElementById('email').value,
+          email: document.getElementById('email').value,
+          phone: document.getElementById('phone').value,
+          city: document.getElementById('city').value,
+          zip: document.getElementById('zip').value,
+          referral: document.getElementById('referral').value,
+          message: document.getElementById('details').value
+        };
+
+        try {
+          await emailjs.send(
+            EMAILJS_CONFIG.SERVICE_ID,
+            EMAILJS_CONFIG.TEMPLATE_ID,
+            formData
+          );
+
+          const successHTML = currentLang === 'en'
+            ? `
+              <div class="success-message">
+                <h3>✅ Message Sent!</h3>
+                <p>Thank you for reaching out. We've received your inquiry and will get back to you soon.</p>
+                <p>You can also email <strong>referrals@optionsforall.org</strong>.</p>
+                <button class="btn btn-primary" type="button" onclick="document.getElementById('closeModal').click()">Close</button>
+              </div>
+            `
+            : `
+              <div class="success-message">
+                <h3>✅ ¡Mensaje Enviado!</h3>
+                <p>Gracias por comunicarse. Hemos recibido su consulta y nos pondremos en contacto pronto.</p>
+                <p>También puede escribir a <strong>referrals@optionsforall.org</strong>.</p>
+                <button class="btn btn-primary" type="button" onclick="document.getElementById('closeModal').click()">Cerrar</button>
+              </div>
+            `;
+
+          modalBody.innerHTML = successHTML;
+
+        } catch (error) {
+          const errorHTML = currentLang === 'en'
+            ? `
+              <div class="error-message">
+                <h3>❌ Something Went Wrong</h3>
+                <p>We couldn't send your message. Please try again or email <strong>referrals@optionsforall.org</strong>.</p>
+                <p class="error-details">Error: ${error?.text || 'Unknown error'}</p>
+                <button class="btn btn-primary" type="button" onclick="document.getElementById('closeModal').click()">Close</button>
+              </div>
+            `
+            : `
+              <div class="error-message">
+                <h3>❌ Algo Salió Mal</h3>
+                <p>No pudimos enviar su mensaje. Intente nuevamente o escriba a <strong>referrals@optionsforall.org</strong>.</p>
+                <p class="error-details">Error: ${error?.text || 'Error desconocido'}</p>
+                <button class="btn btn-primary" type="button" onclick="document.getElementById('closeModal').click()">Cerrar</button>
+              </div>
+            `;
+          modalBody.innerHTML = errorHTML;
+        } finally {
+          const btn = document.getElementById('submitBtn');
+          if (btn) {
+            btn.disabled = false;
+            btn.textContent = currentLang === 'en' ? 'Submit' : 'Enviar';
+          }
+        }
+      });
+    }
+
+    attachFormSubmitListener();
   </script>
 </body>
 </html>
+
