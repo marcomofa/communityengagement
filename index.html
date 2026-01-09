@@ -431,6 +431,89 @@
       max-width: 860px;
     }
 
+    /* SOCIAL FOOTER (like screenshot) */
+    .social-footer{
+      padding: 5rem 0 2.75rem;
+      background: linear-gradient(180deg, #1f3f9a 0%, #2a5dd6 100%);
+      color: #fff;
+      text-align: center;
+    }
+    .social-footer .container{
+      max-width: 1100px;
+    }
+    .social-footer h2{
+      font-size: clamp(2.1rem, 4.2vw, 3.15rem);
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.75rem;
+      font-weight: 800;
+    }
+    .social-footer p{
+      font-size: clamp(1.05rem, 2.1vw, 1.35rem);
+      opacity: 0.95;
+      margin-bottom: 2.2rem;
+    }
+    .social-grid{
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 1.35rem;
+      align-items: stretch;
+      margin: 0 auto 2.75rem;
+      max-width: 980px;
+    }
+    .social-card{
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.9rem;
+      text-decoration: none;
+      color: #fff;
+      background: rgba(255,255,255,0.12);
+      border: 2px solid rgba(255,255,255,0.22);
+      border-radius: 22px;
+      padding: 2rem 1.25rem;
+      min-height: 170px;
+      box-shadow: 0 18px 40px rgba(0,0,0,0.18);
+      transition: transform 0.18s ease, background 0.18s ease, border-color 0.18s ease;
+    }
+    .social-card:hover{
+      transform: translateY(-4px);
+      background: rgba(255,255,255,0.16);
+      border-color: rgba(255,255,255,0.32);
+    }
+    .social-icon{
+      width: 58px;
+      height: 58px;
+      display: grid;
+      place-items: center;
+      border-radius: 16px;
+      background: rgba(255,255,255,0.16);
+      border: 1px solid rgba(255,255,255,0.18);
+    }
+    .social-icon svg{
+      width: 34px;
+      height: 34px;
+      fill: #fff;
+    }
+    .social-label{
+      font-size: 1.25rem;
+      font-weight: 800;
+      letter-spacing: -0.01em;
+    }
+    .social-divider{
+      height: 2px;
+      width: 100%;
+      max-width: 1050px;
+      margin: 0 auto 1.75rem;
+      background: rgba(255,255,255,0.25);
+      border-radius: 999px;
+    }
+    .copyright{
+      font-size: 1.05rem;
+      opacity: 0.95;
+    }
+
     /* Modal */
     .modal-overlay {
       display: none;
@@ -546,6 +629,7 @@
     @media (max-width: 900px) {
       .two-column-layout { grid-template-columns: 1fr; }
       .hero { min-height: auto; padding: 7.5rem 0 3.75rem; }
+      .social-grid{ grid-template-columns: repeat(2, minmax(0, 1fr)); }
     }
     @media (max-width: 768px) {
       .navbar-content { padding: 0 1rem; }
@@ -558,6 +642,7 @@
       .toggle-switch { width: 48px; height: 26px; }
       .toggle-slider { width: 20px; height: 20px; }
       .toggle-switch.active .toggle-slider { transform: translateX(22px); }
+      .social-grid{ grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -626,11 +711,13 @@
             </div>
 
             <div class="column-right">
+              <!-- UPDATED: 100% community-based -->
               <p class="section-content" id="about-p1">
-                At Options For All, every day is an opportunity to connect, grow, and thrive. Our Community Engagement Program provides a welcoming space where adults with disabilities can build meaningful friendships, discover new passions, and participate actively in their local community.
+                At Options For All, every day is an opportunity to connect, grow, and thrive. Our Community Engagement Program is 100% community-based and provides a welcoming space where adults with disabilities can build meaningful friendships, discover new passions, and participate actively in their local community.
               </p>
+              <!-- UPDATED: 3:1 ratio + schedule -->
               <p class="section-content" id="about-p2">
-                We meet Monday through Friday from 8:00 AM to 1:00 PM. Door-to-door transportation is included. We'll pick you up in the morning and bring you home in the afternoon. Routes are personalized based on where you live.
+                We maintain a 3:1 participant-to-staff ratio to ensure consistent support and individualized attention. We meet Monday through Friday from 8:00 AM to 1:00 PM. Door-to-door transportation is included. We'll pick you up in the morning and bring you home in the afternoon. Routes are personalized based on where you live.
               </p>
             </div>
           </div>
@@ -687,10 +774,18 @@
           <p class="section-content" id="org-p1">
             Options For All is a nonprofit organization with more than 40 years of experience supporting individuals and families through high-quality, community-based programs.
           </p>
+
+          <!-- NEW: partnerships line -->
           <p class="section-content" id="org-p2">
+            We proudly partner with the San Diego Regional Center and the Department of Rehabilitation to help individuals access services that support meaningful community connection and long-term success.
+          </p>
+
+          <p class="section-content" id="org-p3">
             We are committed to creating inclusive, welcoming spaces where people feel valued, supported, and connected. Our programs are built around consistency, relationship-building, and person-centered support, allowing participants to grow at their own pace while staying actively engaged in their communities.
           </p>
-          <p class="section-content" id="org-p3">
+
+          <!-- NEW paragraph id org-p4 -->
+          <p class="section-content" id="org-p4">
             Our long-standing presence in the community reflects our focus on quality, trust, and meaningful outcomes. Families choose Options For All because of our experienced staff, thoughtful programming, and deep commitment to belonging and inclusion.
           </p>
 
@@ -727,18 +822,21 @@
         <div class="container section-inner">
           <h2 class="section-title" id="communities-title">Serving Your Neighborhood</h2>
           <p class="section-content" id="communities-intro">
-            We proudly welcome participants from Chula Vista and surrounding South Bay communities:
+            We proudly welcome participants from our service areas across the region:
           </p>
 
+          <!-- UPDATED LIST -->
           <ul class="list-columns" id="communities-list">
+            <li>San Diego</li>
+            <li>Clairemont</li>
+            <li>Mission Valley</li>
+            <li>El Cajon</li>
+            <li>Spring Valley</li>
+            <li>North County</li>
+
+            <!-- keep original South Bay coverage too -->
             <li>Chula Vista</li>
             <li>National City</li>
-            <li>San Ysidro</li>
-            <li>Paradise Hills</li>
-            <li>Encanto</li>
-            <li>City Heights</li>
-            <li>Otay and Otay Ranch</li>
-            <li>South San Diego</li>
           </ul>
 
           <p class="section-content" id="communities-outro">
@@ -763,6 +861,11 @@
             <div class="activity-tag">Bingo</div>
             <div class="activity-tag" id="activity-sports">Sports &amp; Games</div>
             <div class="activity-tag">Lego Club</div>
+
+            <!-- NEW ACTIVITIES -->
+            <div class="activity-tag" id="activity-volunteering">Volunteering</div>
+            <div class="activity-tag" id="activity-socialrec">Social Rec Classes</div>
+            <div class="activity-tag" id="activity-selfadvocacy">Self-Advocacy Club</div>
           </div>
 
           <p class="section-content" id="activities-outro">
@@ -772,7 +875,7 @@
       </section>
     </div>
 
-    <!-- FOOTER CTA -->
+    <!-- FOOTER CTA (keep) -->
     <section class="footer-cta" id="footer-cta">
       <div class="container">
         <h2 id="contact-title">Let's Start the Conversation</h2>
@@ -786,6 +889,50 @@
       </div>
     </section>
 
+    <!-- NEW SOCIAL FOOTER -->
+    <footer class="social-footer" aria-label="Social media footer">
+      <div class="container">
+        <h2 id="social-title">Check Us Out on Social Media</h2>
+        <p id="social-subtitle">Stay connected and see what we're up to!</p>
+
+        <div class="social-grid">
+          <a class="social-card" href="https://www.facebook.com/Options4All/" target="_blank" rel="noopener noreferrer" aria-label="Visit our Facebook">
+            <div class="social-icon" aria-hidden="true">
+              <!-- Facebook icon -->
+              <svg viewBox="0 0 24 24"><path d="M22 12a10 10 0 1 0-11.5 9.9v-7h-2.1V12h2.1V9.8c0-2.1 1.3-3.3 3.2-3.3.9 0 1.8.1 1.8.1v2h-1c-1 0-1.3.6-1.3 1.2V12h2.2l-.4 2.9h-1.8v7A10 10 0 0 0 22 12Z"/></svg>
+            </div>
+            <div class="social-label">Facebook</div>
+          </a>
+
+          <a class="social-card" href="https://www.instagram.com/options4all/related_profiles/" target="_blank" rel="noopener noreferrer" aria-label="Visit our Instagram">
+            <div class="social-icon" aria-hidden="true">
+              <!-- Instagram icon -->
+              <svg viewBox="0 0 24 24"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5Zm10 2H7a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3Zm-5 4.5A5.5 5.5 0 1 1 6.5 14 5.5 5.5 0 0 1 12 8.5Zm0 2A3.5 3.5 0 1 0 15.5 14 3.5 3.5 0 0 0 12 10.5ZM18 6.8a1.2 1.2 0 1 1-1.2 1.2A1.2 1.2 0 0 1 18 6.8Z"/></svg>
+            </div>
+            <div class="social-label">Instagram</div>
+          </a>
+
+          <a class="social-card" href="https://www.linkedin.com/company/options-for-all" target="_blank" rel="noopener noreferrer" aria-label="Visit our LinkedIn">
+            <div class="social-icon" aria-hidden="true">
+              <!-- LinkedIn icon -->
+              <svg viewBox="0 0 24 24"><path d="M20.4 2H3.6A1.6 1.6 0 0 0 2 3.6v16.8A1.6 1.6 0 0 0 3.6 22h16.8a1.6 1.6 0 0 0 1.6-1.6V3.6A1.6 1.6 0 0 0 20.4 2ZM8 19H5V10h3v9ZM6.5 8.7A1.8 1.8 0 1 1 8.3 7 1.8 1.8 0 0 1 6.5 8.7ZM19 19h-3v-4.6c0-1.1 0-2.6-1.6-2.6s-1.8 1.2-1.8 2.5V19h-3V10h2.9v1.2h.1a3.2 3.2 0 0 1 2.9-1.6c3.1 0 3.7 2 3.7 4.7V19Z"/></svg>
+            </div>
+            <div class="social-label">LinkedIn</div>
+          </a>
+
+          <a class="social-card" href="https://optionsforall.org" target="_blank" rel="noopener noreferrer" aria-label="Visit our Website">
+            <div class="social-icon" aria-hidden="true">
+              <!-- Globe icon -->
+              <svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2Zm7.9 9H16.8a15.2 15.2 0 0 0-1.3-6 8 8 0 0 1 4.4 6ZM12 4a13 13 0 0 1 2 7H10a13 13 0 0 1 2-7ZM4.1 13H7.2a15.2 15.2 0 0 0 1.3 6 8 8 0 0 1-4.4-6ZM7.2 11H4.1a8 8 0 0 1 4.4-6 15.2 15.2 0 0 0-1.3 6Zm2.8 2h4a13 13 0 0 1-2 7 13 13 0 0 1-2-7Zm6.8 0h3.1a8 8 0 0 1-4.4 6 15.2 15.2 0 0 0 1.3-6Z"/></svg>
+            </div>
+            <div class="social-label">Website</div>
+          </a>
+        </div>
+
+        <div class="social-divider" aria-hidden="true"></div>
+        <div class="copyright">© <span id="copyrightYear"></span> Options For All. All rights reserved.</div>
+      </div>
+    </footer>
   </div>
 
   <!-- MODAL -->
@@ -888,8 +1035,8 @@
         secondary_button: 'View Our Location',
 
         about_title: 'What to Expect',
-        about_p1: 'At Options For All, every day is an opportunity to connect, grow, and thrive. Our Community Engagement Program provides a welcoming space where adults with disabilities can build meaningful friendships, discover new passions, and participate actively in their local community.',
-        about_p2: 'We meet Monday through Friday from 8:00 AM to 1:00 PM. Door-to-door transportation is included. We\'ll pick you up in the morning and bring you home in the afternoon. Routes are personalized based on where you live.',
+        about_p1: 'At Options For All, every day is an opportunity to connect, grow, and thrive. Our Community Engagement Program is 100% community-based and provides a welcoming space where adults with disabilities can build meaningful friendships, discover new passions, and participate actively in their local community.',
+        about_p2: 'We maintain a 3:1 participant-to-staff ratio to ensure consistent support and individualized attention. We meet Monday through Friday from 8:00 AM to 1:00 PM. Door-to-door transportation is included. We\'ll pick you up in the morning and bring you home in the afternoon. Routes are personalized based on where you live.',
         highlight_p1: 'Every person brings unique strengths and interests. That\'s why we create individualized daily plans that honor what matters most to each participant. Whether you want to try something brand new or dive deeper into a favorite activity, our caring team is here to support you every step of the way.',
         highlight_p2: 'For over 40 years, Options For All has been a trusted partner for families across San Diego. Our experienced, compassionate staff create an environment where everyone belongs, every voice is heard, and every day brings new possibilities.',
 
@@ -907,8 +1054,9 @@
 
         org_title: 'About Options For All',
         org_p1: 'Options For All is a nonprofit organization with more than 40 years of experience supporting individuals and families through high-quality, community-based programs.',
-        org_p2: 'We are committed to creating inclusive, welcoming spaces where people feel valued, supported, and connected. Our programs are built around consistency, relationship-building, and person-centered support, allowing participants to grow at their own pace while staying actively engaged in their communities.',
-        org_p3: 'Our long-standing presence in the community reflects our focus on quality, trust, and meaningful outcomes. Families choose Options For All because of our experienced staff, thoughtful programming, and deep commitment to belonging and inclusion.',
+        org_p2: 'We proudly partner with the San Diego Regional Center and the Department of Rehabilitation to help individuals access services that support meaningful community connection and long-term success.',
+        org_p3: 'We are committed to creating inclusive, welcoming spaces where people feel valued, supported, and connected. Our programs are built around consistency, relationship-building, and person-centered support, allowing participants to grow at their own pace while staying actively engaged in their communities.',
+        org_p4: 'Our long-standing presence in the community reflects our focus on quality, trust, and meaningful outcomes. Families choose Options For All because of our experienced staff, thoughtful programming, and deep commitment to belonging and inclusion.',
         why_1_title: '40+ Years of Experience',
         why_1_text: 'Decades of community-based support and trusted partnerships',
         why_2_title: 'Compassionate Team',
@@ -919,7 +1067,7 @@
         why_4_text: 'Strong emphasis on connection, routine, and involvement',
 
         communities_title: 'Serving Your Neighborhood',
-        communities_intro: 'We proudly welcome participants from Chula Vista and surrounding South Bay communities:',
+        communities_intro: 'We proudly welcome participants from our service areas across the region:',
         communities_outro: 'Live nearby? We\'d love to connect with you. Transportation is included and tailored to your location.',
 
         activities_title: 'How We Spend Our Days',
@@ -927,6 +1075,9 @@
         activity_cooking: 'Cooking Together',
         activity_arts: 'Arts & Crafts',
         activity_sports: 'Sports & Games',
+        activity_volunteering: 'Volunteering',
+        activity_socialrec: 'Social Rec Classes',
+        activity_selfadvocacy: 'Self-Advocacy Club',
         activities_outro: 'Activities rotate regularly to keep things fresh, fun, and engaging for everyone.',
 
         contact_title: 'Let\'s Start the Conversation',
@@ -934,7 +1085,10 @@
         contact_methods: 'You can reach us at <strong>referrals@optionsforall.org</strong> or click the button below.',
         contact_button: 'Get in Touch',
 
-        img_2_text: 'Daily activities - Participants engaging together'
+        img_2_text: 'Daily activities - Participants engaging together',
+
+        social_title: 'Check Us Out on Social Media',
+        social_subtitle: 'Stay connected and see what we\'re up to!'
       },
 
       es: {
@@ -944,8 +1098,8 @@
         secondary_button: 'Ver Nuestra Ubicación',
 
         about_title: 'Qué Esperar',
-        about_p1: 'En Options For All, cada día es una oportunidad para conectar, crecer y prosperar. Nuestro Programa de Participación Comunitaria ofrece un espacio acogedor donde adultos con discapacidades pueden construir amistades significativas, descubrir nuevas pasiones y participar activamente en su comunidad local.',
-        about_p2: 'Nos reunimos de lunes a viernes de 8:00 AM a 1:00 PM. El transporte puerta a puerta está incluido. Lo recogemos por la mañana y lo llevamos a casa por la tarde. Las rutas se personalizan según donde vive.',
+        about_p1: 'En Options For All, cada día es una oportunidad para conectar, crecer y prosperar. Nuestro Programa de Participación Comunitaria es 100% basado en la comunidad y ofrece un espacio acogedor donde adultos con discapacidades pueden construir amistades significativas, descubrir nuevas pasiones y participar activamente en su comunidad local.',
+        about_p2: 'Mantenemos una proporción de 3 participantes por 1 miembro del personal para brindar apoyo constante y atención individualizada. Nos reunimos de lunes a viernes de 8:00 AM a 1:00 PM. El transporte puerta a puerta está incluido. Lo recogemos por la mañana y lo llevamos a casa por la tarde. Las rutas se personalizan según donde vive.',
         highlight_p1: 'Cada persona trae fortalezas e intereses únicos. Por eso creamos planes diarios individualizados que honran lo que más le importa a cada participante. Ya sea que quiera probar algo completamente nuevo o profundizar en una actividad favorita, nuestro equipo está aquí para apoyarlo en cada paso.',
         highlight_p2: 'Durante más de 40 años, Options For All ha sido un socio de confianza para familias en todo San Diego. Nuestro personal experimentado y compasivo crea un ambiente donde todos pertenecen, cada voz es escuchada, y cada día trae nuevas posibilidades.',
 
@@ -963,8 +1117,9 @@
 
         org_title: 'Acerca de Options For All',
         org_p1: 'Options For All es una organización sin fines de lucro con más de 40 años de experiencia apoyando a individuos y familias a través de programas comunitarios de alta calidad.',
-        org_p2: 'Estamos comprometidos a crear espacios inclusivos y acogedores donde las personas se sientan valoradas, apoyadas y conectadas. Nuestros programas se construyen en torno a la consistencia, la construcción de relaciones y el apoyo centrado en la persona, permitiendo que los participantes crezcan a su propio ritmo mientras se mantienen activamente comprometidos en sus comunidades.',
-        org_p3: 'Nuestra presencia de larga data en la comunidad refleja nuestro enfoque en la calidad, la confianza y los resultados significativos. Las familias eligen Options For All por nuestro personal experimentado, programación reflexiva y profundo compromiso con la pertenencia y la inclusión.',
+        org_p2: 'Nos enorgullece colaborar con el San Diego Regional Center y el Department of Rehabilitation para ayudar a las personas a acceder a servicios que apoyan una conexión comunitaria significativa y el éxito a largo plazo.',
+        org_p3: 'Estamos comprometidos a crear espacios inclusivos y acogedores donde las personas se sientan valoradas, apoyadas y conectadas. Nuestros programas se construyen en torno a la consistencia, la construcción de relaciones y el apoyo centrado en la persona, permitiendo que los participantes crezcan a su propio ritmo mientras se mantienen activamente comprometidos en sus comunidades.',
+        org_p4: 'Nuestra presencia de larga trayectoria en la comunidad refleja nuestro enfoque en la calidad, la confianza y resultados significativos. Las familias eligen Options For All por nuestro personal con experiencia, programación reflexiva y profundo compromiso con la pertenencia y la inclusión.',
         why_1_title: '40+ Años de Experiencia',
         why_1_text: 'Décadas de apoyo comunitario y asociaciones de confianza',
         why_2_title: 'Equipo Compasivo',
@@ -975,7 +1130,7 @@
         why_4_text: 'Fuerte énfasis en la conexión, la rutina y la participación',
 
         communities_title: 'Sirviendo Su Vecindario',
-        communities_intro: 'Con orgullo damos la bienvenida a participantes de Chula Vista y comunidades cercanas del South Bay:',
+        communities_intro: 'Con orgullo damos la bienvenida a participantes de nuestras áreas de servicio en toda la región:',
         communities_outro: '¿Vive cerca? Nos encantaría conectarnos con usted. El transporte está incluido y adaptado a su ubicación.',
 
         activities_title: 'Cómo Pasamos Nuestros Días',
@@ -983,6 +1138,9 @@
         activity_cooking: 'Cocinando Juntos',
         activity_arts: 'Artes y Manualidades',
         activity_sports: 'Deportes y Juegos',
+        activity_volunteering: 'Voluntariado',
+        activity_socialrec: 'Clases de Recreación Social',
+        activity_selfadvocacy: 'Club de Autodefensa',
         activities_outro: 'Las actividades rotan regularmente para mantener todo fresco, divertido y atractivo para todos.',
 
         contact_title: 'Comencemos la Conversación',
@@ -990,7 +1148,10 @@
         contact_methods: 'Puede comunicarse con nosotros a <strong>referrals@optionsforall.org</strong> o haga clic en el botón a continuación.',
         contact_button: 'Contáctenos',
 
-        img_2_text: 'Actividades diarias - Participantes interactuando juntos'
+        img_2_text: 'Actividades diarias - Participantes interactuando juntos',
+
+        social_title: 'Conéctese con Nosotros en Redes Sociales',
+        social_subtitle: '¡Manténgase al tanto y vea lo que estamos haciendo!'
       }
     };
 
@@ -1031,6 +1192,9 @@
       document.getElementById('org-p1').textContent = content.org_p1;
       document.getElementById('org-p2').textContent = content.org_p2;
       document.getElementById('org-p3').textContent = content.org_p3;
+      const orgP4 = document.getElementById('org-p4');
+      if (orgP4) orgP4.textContent = content.org_p4;
+
       document.getElementById('why-1-title').textContent = content.why_1_title;
       document.getElementById('why-1-text').textContent = content.why_1_text;
       document.getElementById('why-2-title').textContent = content.why_2_title;
@@ -1051,6 +1215,16 @@
       document.getElementById('activity-cooking').textContent = content.activity_cooking;
       document.getElementById('activity-arts').textContent = content.activity_arts;
       document.getElementById('activity-sports').textContent = content.activity_sports;
+
+      const volunteering = document.getElementById('activity-volunteering');
+      if (volunteering) volunteering.textContent = content.activity_volunteering;
+
+      const socialrec = document.getElementById('activity-socialrec');
+      if (socialrec) socialrec.textContent = content.activity_socialrec;
+
+      const selfadv = document.getElementById('activity-selfadvocacy');
+      if (selfadv) selfadv.textContent = content.activity_selfadvocacy;
+
       document.getElementById('activities-outro').textContent = content.activities_outro;
 
       // Footer CTA
@@ -1058,6 +1232,12 @@
       document.getElementById('contact-subtitle').textContent = content.contact_subtitle;
       document.getElementById('contact-methods').innerHTML = content.contact_methods;
       document.getElementById('contact-button').textContent = content.contact_button;
+
+      // Social footer text
+      const socialTitle = document.getElementById('social-title');
+      const socialSubtitle = document.getElementById('social-subtitle');
+      if (socialTitle) socialTitle.textContent = content.social_title;
+      if (socialSubtitle) socialSubtitle.textContent = content.social_subtitle;
 
       // Placeholder
       const img2 = document.getElementById('img-2-text');
@@ -1097,6 +1277,12 @@
     document.getElementById('lang-es').addEventListener('keydown', (e) => {
       if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setLang('es'); }
     });
+
+    // Set copyright year
+    (function setYear(){
+      const el = document.getElementById('copyrightYear');
+      if (el) el.textContent = new Date().getFullYear();
+    })();
 
     // Initialize default content
     updateContent(currentLang);
