@@ -71,7 +71,20 @@
       justify-content: space-between;
       gap: 2rem;
     }
-    .site-logo { height: 42px; width: auto; display: block; }
+
+    /* Logo (left) */
+    .logo-container{
+      display: inline-flex;
+      align-items: center;
+      text-decoration: none;
+      line-height: 0;
+    }
+    .site-logo{
+      height: 42px;
+      width: auto;
+      max-width: 220px;
+      display: block;
+    }
 
     /* Language Toggle */
     .language-toggle {
@@ -214,15 +227,11 @@
     /* SECTIONS */
     .content { width: 100%; }
 
-    .section {
-      padding: 4.5rem 0;
-    }
+    .section { padding: 4.5rem 0; }
     .section.bg-a { background: var(--sectionA); }
     .section.bg-b { background: var(--sectionB); }
 
-    .section-inner {
-      background: rgba(255,255,255,0.0);
-    }
+    .section-inner { background: rgba(255,255,255,0.0); }
 
     .section-title {
       font-size: clamp(1.9rem, 3.2vw, 2.6rem);
@@ -306,7 +315,7 @@
       border-left: 6px solid var(--accent);
     }
 
-    /* Grid cards — FIXED: always white cards */
+    /* Grid cards */
     .grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
@@ -314,7 +323,7 @@
       margin: 1.75rem 0;
     }
     .card {
-      background: var(--surface);           /* ✅ THIS was the big issue */
+      background: var(--surface);
       border-radius: var(--radius);
       padding: 1.65rem;
       box-shadow: var(--shadow-sm);
@@ -557,15 +566,17 @@
   <!-- NAV -->
   <nav class="navbar">
     <div class="navbar-content">
-      <div class="logo-container">
+      <!-- SVG LOGO LEFT -->
+      <a class="logo-container" href="https://optionsforall.org" aria-label="Options For All Home">
         <img
-          src="https://optionsforall.org/wp-content/uploads/2023/03/cropped-Options-for-All-Logo-transp-small.png"
-          alt="Options For All Logo"
+          src="https://optionsforall.org/wp-content/themes/elevation_theme/assets/images/logo.svg"
+          alt="Options For All"
           class="site-logo"
           onerror="this.style.display='none';"
         />
-      </div>
+      </a>
 
+      <!-- Language Toggle RIGHT -->
       <div class="language-toggle" aria-label="Language toggle">
         <span class="lang-label active" id="lang-en" role="button" tabindex="0">EN</span>
         <div class="toggle-switch" id="toggle-switch" role="switch" aria-checked="false" tabindex="0">
@@ -1096,7 +1107,6 @@
     const modal = document.getElementById('contactModal');
     const closeModalBtn = document.getElementById('closeModal');
     const contactForm = document.getElementById('contactForm');
-    const submitBtn = document.getElementById('submitBtn');
     const modalBody = document.getElementById('modalBody');
 
     function openModal() {
@@ -1109,7 +1119,6 @@
       modal.classList.remove('active');
       modal.setAttribute('aria-hidden', 'true');
       document.body.style.overflow = '';
-      // Reset modal content back to form (in case success/error replaced it)
       setTimeout(() => {
         modalBody.innerHTML = contactForm.outerHTML;
         attachFormSubmitListener();
@@ -1140,7 +1149,6 @@
       form.addEventListener('submit', async (e) => {
         e.preventDefault();
 
-        // Check if Email.js is configured
         if (
           EMAILJS_CONFIG.PUBLIC_KEY === 'YOUR_PUBLIC_KEY_HERE' ||
           EMAILJS_CONFIG.SERVICE_ID === 'YOUR_SERVICE_ID_HERE' ||
@@ -1245,4 +1253,5 @@
   </script>
 </body>
 </html>
+
 
