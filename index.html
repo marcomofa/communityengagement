@@ -279,62 +279,65 @@
       line-height: 1.65;
     }
 
-    /* Service area boxes */
-    .service-areas-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 1rem;
-      margin: 1.5rem 0 1.25rem;
+    /* ===========================
+       COMMUNITIES WE SERVE (screenshot style)
+       =========================== */
+    .communities-block .section-title{
+      color: var(--accent);
+      font-size: clamp(2.2rem, 4vw, 3rem);
+      font-weight: 800;
+      margin-bottom: 0.9rem;
     }
-    .service-area-card{
-      background: var(--surface);
-      border: 1px solid rgba(15,23,42,0.08);
-      box-shadow: var(--shadow-sm);
-      border-radius: var(--radius);
-      padding: 1.25rem 1.2rem;
-      display: flex;
-      align-items: flex-start;
-      gap: 0.85rem;
-      transition: transform 0.18s ease, box-shadow 0.18s ease;
+    .communities-block .section-title::after{
+      background: var(--accent);
+      width: 86px;
+      height: 5px;
+      bottom: 0.12rem;
     }
-    .service-area-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); }
-    .service-area-dot{
-      width: 12px;
-      height: 12px;
-      border-radius: 999px;
-      background: var(--accent2);
-      margin-top: 0.35rem;
-      flex: 0 0 auto;
-    }
-    .service-area-card h3{
-      font-size: 1.05rem;
-      margin-bottom: 0.15rem;
-      color: #111827;
-      letter-spacing: -0.01em;
-    }
-    .service-area-card p{
-      font-size: 0.95rem;
-      color: rgba(15,23,42,0.75);
-      line-height: 1.55;
+    .communities-subtitle{
+      font-size: clamp(1.05rem, 1.8vw, 1.25rem);
+      color: rgba(15,23,42,0.85);
+      margin-bottom: 1.9rem;
+      max-width: 980px;
     }
 
-    /* Lists */
-    .list-columns {
+    .pill-grid{
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 0.75rem;
-      margin: 1.1rem 0 0.75rem;
-      padding-left: 0;
+      grid-template-columns: repeat(3, minmax(220px, 1fr));
+      gap: 1.2rem;
+      margin: 1.25rem 0 1.75rem;
     }
-    .list-columns li {
-      list-style: none;
-      background: var(--surface);
-      border: 1px solid rgba(15,23,42,0.08);
-      box-shadow: var(--shadow-sm);
-      border-radius: 12px;
-      padding: 0.85rem 1rem;
-      font-weight: 700;
-      color: rgba(15,23,42,0.82);
+
+    .pill{
+      background: rgba(255,255,255,0.72);
+      border: 2px solid rgba(255,255,255,0.65);
+      border-radius: 14px;
+      padding: 1.05rem 1.25rem;
+      box-shadow: 0 10px 20px rgba(15,23,42,0.08);
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      transition: transform 0.16s ease, box-shadow 0.16s ease, background 0.16s ease;
+      min-height: 64px;
+    }
+    .pill:hover{
+      transform: translateY(-3px);
+      box-shadow: 0 16px 30px rgba(15,23,42,0.12);
+      background: rgba(255,255,255,0.82);
+    }
+    .pill span{
+      font-weight: 800;
+      font-size: 1.22rem;
+      letter-spacing: -0.01em;
+      line-height: 1.15;
+    }
+    .pill.blue span{ color: var(--accent); }
+    .pill.orange span{ color: var(--accent2); }
+
+    .communities-note{
+      font-size: 1.1rem;
+      color: rgba(15,23,42,0.85);
+      margin-top: 0.6rem;
     }
 
     /* Activities tags */
@@ -587,6 +590,9 @@
     .error-details { font-size: 0.92rem; opacity: 0.85; }
 
     /* Responsive */
+    @media (max-width: 980px){
+      .pill-grid{ grid-template-columns: repeat(2, minmax(220px, 1fr)); }
+    }
     @media (max-width: 900px) {
       .two-column-layout { grid-template-columns: 1fr; }
       .hero { min-height: auto; padding: 7.5rem 0 3.75rem; }
@@ -603,6 +609,8 @@
       .toggle-switch { width: 48px; height: 26px; }
       .toggle-slider { width: 20px; height: 20px; }
       .toggle-switch.active .toggle-slider { transform: translateX(22px); }
+      .pill-grid{ grid-template-columns: 1fr; }
+      .pill span{ font-size: 1.15rem; }
     }
     @media (max-width: 520px){
       .social-grid { grid-template-columns: 1fr; }
@@ -770,52 +778,37 @@
         </div>
       </section>
 
-      <!-- WHERE WE SERVE -->
-      <section class="section bg-b">
+      <!-- COMMUNITIES WE SERVE (UPDATED TO MATCH GRAPHIC) -->
+      <section class="section bg-b communities-block" id="communities-section">
         <div class="container section-inner">
-          <h2 class="section-title" id="communities-title">Where We Serve</h2>
-          <p class="section-content" id="communities-intro">
-            We support participants across San Diego County, including these program areas:
+          <h2 class="section-title" id="communities-title">Communities We Serve</h2>
+          <p class="communities-subtitle" id="communities-intro">
+            We welcome participants from San Diego and nearby communities, including:
           </p>
 
-          <div class="service-areas-grid">
-            <div class="service-area-card">
-              <div class="service-area-dot" aria-hidden="true"></div>
-              <div>
-                <h3 id="area-1-title">San Diego</h3>
-                <p id="area-1-text">Central communities and nearby neighborhoods</p>
-              </div>
-            </div>
+          <div class="pill-grid" aria-label="Communities list">
+            <div class="pill orange"><span id="loc-1">San Diego</span></div>
+            <div class="pill orange"><span id="loc-2">Chula Vista</span></div>
+            <div class="pill blue"><span id="loc-3">National City</span></div>
 
-            <div class="service-area-card">
-              <div class="service-area-dot" aria-hidden="true"></div>
-              <div>
-                <h3 id="area-2-title">El Cajon</h3>
-                <p id="area-2-text">East County and surrounding areas</p>
-              </div>
-            </div>
+            <div class="pill orange"><span id="loc-4">San Ysidro</span></div>
+            <div class="pill blue"><span id="loc-5">Paradise Hills</span></div>
+            <div class="pill orange"><span id="loc-6">Encanto</span></div>
 
-            <div class="service-area-card">
-              <div class="service-area-dot" aria-hidden="true"></div>
-              <div>
-                <h3 id="area-3-title">North County</h3>
-                <p id="area-3-text">North County communities and nearby cities</p>
-              </div>
-            </div>
+            <div class="pill blue"><span id="loc-7">City Heights</span></div>
+            <div class="pill orange"><span id="loc-8">Otay and Otay Ranch</span></div>
+            <div class="pill blue"><span id="loc-9">South San Diego</span></div>
+
+            <div class="pill orange"><span id="loc-10">Clairemont</span></div>
+            <div class="pill blue"><span id="loc-11">Mission Valley</span></div>
+            <div class="pill orange"><span id="loc-12">El Cajon</span></div>
+
+            <div class="pill blue"><span id="loc-13">Spring Valley</span></div>
+            <div class="pill blue"><span id="loc-14">North County</span></div>
           </div>
 
-          <p class="section-content" id="neighbors-intro">Nearby neighborhoods we often serve include:</p>
-
-          <ul class="list-columns" id="communities-list">
-            <li>Clairemont</li>
-            <li>Mission Valley</li>
-            <li>El Cajon</li>
-            <li>Spring Valley</li>
-            <li>North County</li>
-          </ul>
-
-          <p class="section-content" id="communities-outro">
-            Live nearby? We'd love to connect with you. Transportation is included and tailored to your location.
+          <p class="communities-note" id="communities-outro">
+            Transportation is available and coordinated based on location.
           </p>
         </div>
       </section>
@@ -1028,17 +1021,26 @@
         why_3_text: 'Programs designed around individual interests and strengths',
         why_4_title: 'Community Focus',
         why_4_text: 'Strong emphasis on connection, routine, and involvement',
-        communities_title: 'Where We Serve',
-        communities_intro: 'We support participants across San Diego County, including these program areas:',
-        neighbors_intro: 'Nearby neighborhoods we often serve include:',
-        communities_outro: 'Live nearby? We\'d love to connect with you. Transportation is included and tailored to your location.',
-        area_1_title: 'San Diego',
-        area_1_text: 'Central communities and nearby neighborhoods',
-        area_2_title: 'El Cajon',
-        area_2_text: 'East County and surrounding areas',
-        area_3_title: 'North County',
-        area_3_text: 'North County communities and nearby cities',
-        communities_list_html: '<li>Clairemont</li><li>Mission Valley</li><li>El Cajon</li><li>Spring Valley</li><li>North County</li>',
+
+        communities_title: 'Communities We Serve',
+        communities_intro: 'We welcome participants from San Diego and nearby communities, including:',
+        communities_outro: 'Transportation is available and coordinated based on location.',
+
+        loc_1: 'San Diego',
+        loc_2: 'Chula Vista',
+        loc_3: 'National City',
+        loc_4: 'San Ysidro',
+        loc_5: 'Paradise Hills',
+        loc_6: 'Encanto',
+        loc_7: 'City Heights',
+        loc_8: 'Otay and Otay Ranch',
+        loc_9: 'South San Diego',
+        loc_10: 'Clairemont',
+        loc_11: 'Mission Valley',
+        loc_12: 'El Cajon',
+        loc_13: 'Spring Valley',
+        loc_14: 'North County',
+
         activities_title: 'How We Spend Our Days',
         activities_intro: 'Every week brings variety, movement, creativity, and connection. Our activities include:',
         activity_cooking: 'Cooking Together',
@@ -1093,17 +1095,26 @@
         why_3_text: 'Programas diseñados en torno a intereses y fortalezas individuales',
         why_4_title: 'Enfoque Comunitario',
         why_4_text: 'Fuerte énfasis en la conexión, la rutina y la participación',
-        communities_title: 'Dónde Servimos',
-        communities_intro: 'Apoyamos a participantes en el Condado de San Diego, incluyendo estas áreas del programa:',
-        neighbors_intro: 'Los vecindarios cercanos que a menudo atendemos incluyen:',
-        communities_outro: '¿Vive cerca? Nos encantaría conectarnos con usted. El transporte está incluido y adaptado a su ubicación.',
-        area_1_title: 'San Diego',
-        area_1_text: 'Comunidades centrales y vecindarios cercanos',
-        area_2_title: 'El Cajon',
-        area_2_text: 'East County y áreas cercanas',
-        area_3_title: 'North County',
-        area_3_text: 'Comunidades de North County y ciudades cercanas',
-        communities_list_html: '<li>Clairemont</li><li>Mission Valley</li><li>El Cajon</li><li>Spring Valley</li><li>North County</li>',
+
+        communities_title: 'Comunidades a las que Servimos',
+        communities_intro: 'Damos la bienvenida a participantes de San Diego y comunidades cercanas, incluyendo:',
+        communities_outro: 'El transporte está disponible y se coordina según la ubicación.',
+
+        loc_1: 'San Diego',
+        loc_2: 'Chula Vista',
+        loc_3: 'National City',
+        loc_4: 'San Ysidro',
+        loc_5: 'Paradise Hills',
+        loc_6: 'Encanto',
+        loc_7: 'City Heights',
+        loc_8: 'Otay y Otay Ranch',
+        loc_9: 'South San Diego',
+        loc_10: 'Clairemont',
+        loc_11: 'Mission Valley',
+        loc_12: 'El Cajon',
+        loc_13: 'Spring Valley',
+        loc_14: 'North County',
+
         activities_title: 'Cómo Pasamos Nuestros Días',
         activities_intro: 'Cada semana trae variedad, movimiento, creatividad y conexión. Nuestras actividades incluyen:',
         activity_cooking: 'Cocinando Juntos',
@@ -1182,18 +1193,25 @@
       safeSetText('why-4-title', content.why_4_title);
       safeSetText('why-4-text', content.why_4_text);
 
-      // Where we serve
+      // Communities
       safeSetText('communities-title', content.communities_title);
       safeSetText('communities-intro', content.communities_intro);
-      safeSetText('neighbors-intro', content.neighbors_intro);
       safeSetText('communities-outro', content.communities_outro);
-      safeSetText('area-1-title', content.area_1_title);
-      safeSetText('area-1-text', content.area_1_text);
-      safeSetText('area-2-title', content.area_2_title);
-      safeSetText('area-2-text', content.area_2_text);
-      safeSetText('area-3-title', content.area_3_title);
-      safeSetText('area-3-text', content.area_3_text);
-      safeSetHTML('communities-list', content.communities_list_html);
+
+      safeSetText('loc-1', content.loc_1);
+      safeSetText('loc-2', content.loc_2);
+      safeSetText('loc-3', content.loc_3);
+      safeSetText('loc-4', content.loc_4);
+      safeSetText('loc-5', content.loc_5);
+      safeSetText('loc-6', content.loc_6);
+      safeSetText('loc-7', content.loc_7);
+      safeSetText('loc-8', content.loc_8);
+      safeSetText('loc-9', content.loc_9);
+      safeSetText('loc-10', content.loc_10);
+      safeSetText('loc-11', content.loc_11);
+      safeSetText('loc-12', content.loc_12);
+      safeSetText('loc-13', content.loc_13);
+      safeSetText('loc-14', content.loc_14);
 
       // Activities
       safeSetText('activities-title', content.activities_title);
@@ -1212,7 +1230,7 @@
       safeSetHTML('contact-methods', content.contact_methods);
       safeSetText('contact-button', content.contact_button);
 
-      // NEW FOOTER
+      // Footer social
       safeSetText('social-title', content.social_title);
       safeSetText('social-subtitle', content.social_subtitle);
       safeSetText('social-facebook', content.social_facebook);
@@ -1296,7 +1314,7 @@
     document.getElementById('contact-button').addEventListener('click', openModal);
 
     document.getElementById('secondary-button').addEventListener('click', () => {
-      const section = document.getElementById('communities-title').closest('.section');
+      const section = document.getElementById('communities-section');
       section.scrollIntoView({ behavior: 'smooth', block: 'start' });
     });
 
@@ -1427,4 +1445,3 @@
   </script>
 </body>
 </html>
-
